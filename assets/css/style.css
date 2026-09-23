@@ -1,0 +1,82 @@
+/* ============================================================
+   snapshot cro — shared styles
+   Loaded by every page. Design direction is Shep's; this file
+   only holds the structural shell.
+   ============================================================ */
+
+:root {
+  --bg: #000;
+  --fg: #fff;
+  --accent: #82ff9e;          /* the green from the wordmark's "n" */
+  --logo-native-width: 1072px;
+}
+
+* { box-sizing: border-box; }
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 40px 20px;
+  background: var(--bg);
+  color: var(--fg);
+  font-family: "Anton", Impact, "Arial Narrow Bold", sans-serif;
+}
+
+/* ---- logo ---- */
+
+.logo {
+  margin: 0;
+  text-align: center;
+}
+
+/* Capped at native width so the bitmap never upscales and goes soft. */
+.logo img {
+  display: block;
+  width: 90vw;
+  max-width: var(--logo-native-width);
+  height: auto;
+}
+
+.logo a {
+  display: inline-block;
+  line-height: 0;
+}
+
+/* ---- buttons ---- */
+
+.buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 40px;
+}
+
+.buttons a {
+  padding: 14px 28px;
+  border: 2px solid var(--fg);
+  border-radius: 999px;
+  color: var(--fg);
+  text-decoration: none;
+  font-size: clamp(.95rem, 1.6vw, 1.15rem);
+  letter-spacing: .02em;
+  transition: background-color .15s ease, color .15s ease;
+}
+
+.buttons a:hover,
+.buttons a:focus-visible {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition-duration: .01ms !important; }
+}
