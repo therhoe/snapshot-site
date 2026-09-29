@@ -13,6 +13,11 @@
   --logo-native-width: 1072px;
   --gutter: 20px;
   --maxw: 1280px;
+
+  /* One family at every size. Swap these two to change the whole
+     site's type; nothing else references a font name. */
+  --font-display: "Space Grotesk", system-ui, sans-serif;
+  --font-text: "Space Grotesk", system-ui, sans-serif;
 }
 
 * { box-sizing: border-box; }
@@ -21,7 +26,7 @@ body {
   margin: 0;
   background: var(--bg);
   color: var(--fg);
-  font-family: "Anton", Impact, "Arial Narrow Bold", sans-serif;
+  font-family: var(--font-text);
 }
 
 body.modal-open { overflow: hidden; }
@@ -77,6 +82,8 @@ body.modal-open { overflow: hidden; }
   border-radius: 999px;
   color: var(--fg);
   text-decoration: none;
+  font-family: var(--font-display);
+  font-weight: 500;
   font-size: clamp(.95rem, 1.6vw, 1.15rem);
   letter-spacing: .02em;
   transition: background-color .15s ease, color .15s ease;
@@ -141,6 +148,8 @@ body.modal-open { overflow: hidden; }
 }
 
 .card-title {
+  font-family: var(--font-display);
+  font-weight: 500;
   font-size: 1.1rem;
   line-height: 1.2;
 }
@@ -213,9 +222,11 @@ body.modal-open { overflow: hidden; }
 
 .modal-title {
   margin: 0;
+  font-family: var(--font-display);
   font-size: clamp(1.5rem, 3vw, 2.2rem);
-  font-weight: 400;
+  font-weight: 700;
   line-height: 1.1;
+  letter-spacing: -.02em;
 }
 
 .modal-subtitle {
@@ -224,11 +235,9 @@ body.modal-open { overflow: hidden; }
   font-size: 1rem;
 }
 
-/* Body copy switches to a readable text face — Anton is a display
-   font and becomes hard work at paragraph length. */
 .modal-body {
   margin-top: 24px;
-  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-family: var(--font-text);
   font-size: 1rem;
   line-height: 1.65;
 }
