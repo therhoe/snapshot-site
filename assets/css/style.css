@@ -15,6 +15,8 @@
      Tune these two to change how much shows. */
   --thumb-pad: 12%;           /* inset on the top and left only */
   --thumb-zoom: 150%;         /* image width relative to the frame */
+  --thumb-radius: 12px;       /* the green frame's corners */
+  --thumb-img-radius: 8px;    /* the screenshot's own corners */
   --muted: #8a8a8a;
   --line: #2a2a2a;
   --logo-native-width: 1072px;
@@ -139,6 +141,7 @@ body.modal-open { overflow: hidden; }
   padding: var(--thumb-pad) 0 0 var(--thumb-pad);
   background: var(--bg);
   border: 2px solid var(--accent);
+  border-radius: var(--thumb-radius);
   overflow: hidden;
 }
 
@@ -149,6 +152,7 @@ body.modal-open { overflow: hidden; }
   width: var(--thumb-zoom);
   max-width: none;
   height: auto;
+  border-radius: var(--thumb-img-radius);
   transition: transform .25s ease;
   transform-origin: top left;
 }
