@@ -47,14 +47,28 @@ body.modal-open { overflow: hidden; }
   padding-inline: var(--gutter);
 }
 
+/* ---- header ---- */
+
+/* Sits in normal flow rather than fixed, so it never overlaps the
+   grid on short screens. */
+.site-header {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding: 22px var(--gutter) 0;
+}
+
+.site-header .buttons { margin-top: 0; }
+
 /* ---- hero ---- */
 
 .hero {
-  min-height: 100vh;
-  min-height: 100dvh;
   display: grid;
-  place-items: center;
-  padding: 40px var(--gutter);
+  justify-items: center;
+  padding: 36px var(--gutter) 72px;
+  text-align: center;
 }
 
 .logo {
@@ -62,12 +76,19 @@ body.modal-open { overflow: hidden; }
   text-align: center;
 }
 
-/* Capped at native width so the bitmap never upscales and goes soft. */
 .logo img {
   display: block;
-  width: 90vw;
-  max-width: var(--logo-native-width);
+  width: 92vw;
+  max-width: 1200px;
   height: auto;
+}
+
+.hero-sub {
+  max-width: 62ch;
+  margin: 32px 0 0;
+  color: var(--muted);
+  font-size: clamp(1rem, 1.5vw, 1.12rem);
+  line-height: 1.6;
 }
 
 .logo a {
@@ -112,6 +133,22 @@ body.modal-open { overflow: hidden; }
 /* ---- card grid ---- */
 
 .grid-section { padding: 0 0 100px; }
+
+.group-title {
+  margin: 0 0 24px;
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.6vw, 2rem);
+  font-weight: 700;
+  line-height: 1.1;
+  letter-spacing: -.02em;
+}
+
+.group-divider {
+  height: 0;
+  margin: 64px 0;
+  border: 0;
+  border-top: 1px solid var(--line);
+}
 
 .grid {
   display: grid;
@@ -268,6 +305,15 @@ body.modal-open { overflow: hidden; }
 
 @media (max-width: 1000px) {
   .grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 760px) {
+  /* The wordmark is 8:1, so at phone widths it reads as a thin strip
+     unless it runs nearly edge to edge. Uncapped here on purpose. */
+  .logo img { width: 96vw; max-width: none; }
+
+  .site-header { justify-content: center; padding-top: 18px; }
+  .hero { padding: 28px var(--gutter) 56px; }
 }
 
 @media (max-width: 720px) {

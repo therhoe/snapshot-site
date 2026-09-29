@@ -11,8 +11,8 @@
 (function () {
   "use strict";
 
-  var grid = document.getElementById("grid");
-  if (!grid) return;
+  var root = document.getElementById("grid");
+  if (!root) return;
 
   var modal = document.getElementById("modal");
   var modalImage = modal.querySelector(".modal-image");
@@ -124,36 +124,76 @@
 
   /* ---- load ---- */
 
+  // Groups appear in the order their section name is first seen, so
+  // reordering sections means reordering items in the JSON.
+  function groupBySection(items) {
+    var order = [];
+    var bySection = {};
+
+    items.forEach(function (item, index) {
+      var name = item.section || "";
+      if (!bySection[name]) {
+        bySection[name] = [];
+        order.push(name);
+      }
+      bySection[name].push(index);
+    });
+
+    return order.map(function (name) {
+      return { name: name, indexes: bySection[name] };
+    });
+  }
+
   fetch("data/items.json")
     .then(function (response) {
       if (!response.ok) throw new Error("HTTP " + response.status);
       return response.json();
     })
     .then(function (items) {
-      if (!Array.isArray(items) || !items.length) {
-        grid.innerHTML = "";
-        return;
-      }
+      root.innerHTML = "";
+      if (!Array.isArray(items) || !items.length) return;
 
       var fragment = document.createDocumentFragment();
-      items.forEach(function (item, index) {
-        fragment.appendChild(buildCard(item, index));
+
+      groupBySection(items).forEach(function (group, position) {
+        if (position > 0) {
+          fragment.appendChild(document.createElement("hr")).className =
+            "group-divider";
+        }
+
+        var section = document.createElement("section");
+        section.className = "group";
+
+        if (group.name) {
+          var heading = document.createElement("h2");
+          heading.className = "group-title";
+          heading.textContent = group.name;
+          section.appendChild(heading);
+        }
+
+        var grid = document.createElement("div");
+        grid.className = "grid";
+        group.indexes.forEach(function (index) {
+          grid.appendChild(buildCard(items[index], index));
+        });
+
+        section.appendChild(grid);
+        fragment.appendChild(section);
       });
 
-      grid.innerHTML = "";
-      grid.appendChild(fragment);
+      root.appendChild(fragment);
 
-      grid.addEventListener("click", function (e) {
+      root.addEventListener("click", function (e) {
         var card = e.target.closest(".card");
         if (card) openModal(items[card.dataset.index], card);
       });
     })
     .catch(function (error) {
-      grid.innerHTML = "";
+      root.innerHTML = "";
       var message = document.createElement("p");
       message.className = "grid-error";
       message.textContent = "Couldn't load items (" + error.message + ").";
-      grid.appendChild(message);
+      root.appendChild(message);
     });
 
   /* ---- close handlers ---- */

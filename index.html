@@ -13,23 +13,32 @@
 </head>
 <body>
 
-  <section class="hero">
-    <div>
-      <h1 class="logo">
-        <img src="assets/img/logo.png" alt="snapshot cro" width="1072" height="128">
-      </h1>
+  <header class="site-header">
+    <nav class="buttons">
+      <a href="install-snapshot/">install app</a>
+      <a href="workshop/">do the workshop</a>
+    </nav>
+  </header>
 
-      <nav class="buttons">
-        <a href="install-snapshot/">install app</a>
-        <a href="workshop/">do the workshop</a>
-      </nav>
-    </div>
+  <section class="hero">
+    <h1 class="logo">
+      <img src="assets/img/logo.png" alt="snapshot cro" width="1072" height="128">
+    </h1>
+
+    <!-- PLACEHOLDER — replace with real copy. -->
+    <p class="hero-sub">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
+      tempor incididunt ut labore et dolore magna aliqua, quis nostrud
+      exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
+    </p>
   </section>
 
   <section class="grid-section">
     <div class="container">
-      <!-- Cards are rendered from data/items.json by assets/js/grid.js -->
-      <div class="grid" id="grid"></div>
+      <!-- Sections and cards are rendered from data/items.json by
+           assets/js/grid.js. This element is only the container —
+           the .grid class belongs on the per-section grids inside. -->
+      <div id="grid"></div>
     </div>
   </section>
 
