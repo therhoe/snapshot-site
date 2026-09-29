@@ -1,0 +1,38 @@
+[
+  {
+    "title": "Item One",
+    "subtitle": "Placeholder subtitle",
+    "image": "",
+    "body": "Placeholder body text. This is what appears in the modal when the card is clicked. Replace this with the real explanation.\n\nBlank lines become separate paragraphs."
+  },
+  {
+    "title": "Item Two",
+    "subtitle": "Placeholder subtitle",
+    "image": "",
+    "body": "Placeholder body text."
+  },
+  {
+    "title": "Item Three",
+    "subtitle": "Placeholder subtitle",
+    "image": "",
+    "body": "Placeholder body text."
+  },
+  {
+    "title": "Item Four",
+    "subtitle": "Placeholder subtitle",
+    "image": "",
+    "body": "Placeholder body text."
+  },
+  {
+    "title": "Item Five",
+    "subtitle": "Placeholder subtitle",
+    "image": "",
+    "body": "Placeholder body text."
+  },
+  {
+    "title": "Item Six",
+    "subtitle": "Placeholder subtitle",
+    "image": "",
+    "body": "Placeholder body text."
+  }
+]

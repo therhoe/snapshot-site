@@ -1,31 +1,47 @@
 /* ============================================================
    snapshot cro — shared styles
    Loaded by every page. Design direction is Shep's; this file
-   only holds the structural shell.
+   holds the structural shell only.
    ============================================================ */
 
 :root {
   --bg: #000;
   --fg: #fff;
   --accent: #82ff9e;          /* the green from the wordmark's "n" */
+  --muted: #8a8a8a;
+  --line: #2a2a2a;
   --logo-native-width: 1072px;
+  --gutter: 20px;
+  --maxw: 1280px;
 }
 
 * { box-sizing: border-box; }
 
 body {
   margin: 0;
-  min-height: 100vh;
-  min-height: 100dvh;
-  display: grid;
-  place-items: center;
-  padding: 40px 20px;
   background: var(--bg);
   color: var(--fg);
   font-family: "Anton", Impact, "Arial Narrow Bold", sans-serif;
 }
 
-/* ---- logo ---- */
+body.modal-open { overflow: hidden; }
+
+.container {
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* ---- hero ---- */
+
+.hero {
+  min-height: 100vh;
+  min-height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: 40px var(--gutter);
+}
 
 .logo {
   margin: 0;
@@ -75,6 +91,164 @@ body {
 :focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 4px;
+}
+
+/* ---- card grid ---- */
+
+.grid-section { padding: 0 0 100px; }
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 0;
+  margin: 0;
+  background: none;
+  border: 0;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+/* Fixed ratio reserves the space before the image loads, so the
+   grid doesn't jump as cards fill in. */
+.card-image {
+  display: block;
+  aspect-ratio: 4 / 3;
+  background: #141414;
+  border: 1px solid var(--line);
+  overflow: hidden;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform .25s ease;
+}
+
+.card:hover .card-image img,
+.card:focus-visible .card-image img {
+  transform: scale(1.03);
+}
+
+.card-title {
+  font-size: 1.1rem;
+  line-height: 1.2;
+}
+
+.card-subtitle {
+  color: var(--muted);
+  font-size: .9rem;
+  line-height: 1.3;
+}
+
+.grid-error {
+  grid-column: 1 / -1;
+  color: var(--muted);
+}
+
+/* ---- modal ---- */
+
+.modal {
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  padding: var(--gutter);
+  background: rgba(0, 0, 0, .85);
+  overflow-y: auto;
+}
+
+.modal[hidden] { display: none; }
+
+.modal-panel {
+  position: relative;
+  width: 100%;
+  max-width: 720px;
+  max-height: calc(100vh - 2 * var(--gutter));
+  overflow-y: auto;
+  padding: 40px;
+  background: #0b0b0b;
+  border: 1px solid var(--line);
+}
+
+.modal-close {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 40px;
+  height: 40px;
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 50%;
+  color: var(--fg);
+  font: inherit;
+  font-size: 1.2rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.modal-close:hover {
+  background: var(--fg);
+  color: var(--bg);
+}
+
+.modal-image img {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin-bottom: 24px;
+  border: 1px solid var(--line);
+}
+
+.modal-title {
+  margin: 0;
+  font-size: clamp(1.5rem, 3vw, 2.2rem);
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+.modal-subtitle {
+  margin: 6px 0 0;
+  color: var(--muted);
+  font-size: 1rem;
+}
+
+/* Body copy switches to a readable text face — Anton is a display
+   font and becomes hard work at paragraph length. */
+.modal-body {
+  margin-top: 24px;
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  font-size: 1rem;
+  line-height: 1.65;
+}
+
+.modal-body p { margin: 0 0 1em; }
+.modal-body p:last-child { margin-bottom: 0; }
+
+/* ---- responsive ---- */
+
+@media (max-width: 1000px) {
+  .grid { grid-template-columns: repeat(3, 1fr); }
+}
+
+@media (max-width: 720px) {
+  .grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
+  .modal-panel { padding: 28px 20px; }
+}
+
+@media (max-width: 420px) {
+  .grid { grid-template-columns: 1fr; }
 }
 
 @media (prefers-reduced-motion: reduce) {
