@@ -7,7 +7,14 @@
 :root {
   --bg: #000;
   --fg: #fff;
-  --accent: #82ff9e;          /* the green from the wordmark's "n" */
+  --accent: #85ff97;          /* the green from the wordmark's "n" */
+
+  /* Card thumbnails. The image is deliberately clipped: it sits
+     inset from the top-left and runs off the right and bottom, so
+     the card shows a stylized corner rather than the whole shot.
+     Tune these two to change how much shows. */
+  --thumb-pad: 12%;           /* inset on the top and left only */
+  --thumb-zoom: 150%;         /* image width relative to the frame */
   --muted: #8a8a8a;
   --line: #2a2a2a;
   --logo-native-width: 1072px;
@@ -129,17 +136,21 @@ body.modal-open { overflow: hidden; }
 .card-image {
   display: block;
   aspect-ratio: 4 / 3;
-  background: #141414;
-  border: 1px solid var(--line);
+  padding: var(--thumb-pad) 0 0 var(--thumb-pad);
+  background: var(--bg);
+  border: 2px solid var(--accent);
   overflow: hidden;
 }
 
+/* Anchored top-left at its own scale — whatever falls outside the
+   frame on the right and bottom is clipped away. */
 .card-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
   display: block;
+  width: var(--thumb-zoom);
+  max-width: none;
+  height: auto;
   transition: transform .25s ease;
+  transform-origin: top left;
 }
 
 .card:hover .card-image img,
@@ -183,7 +194,7 @@ body.modal-open { overflow: hidden; }
 .modal-panel {
   position: relative;
   width: 100%;
-  max-width: 720px;
+  max-width: 1200px;
   max-height: calc(100vh - 2 * var(--gutter));
   overflow-y: auto;
   padding: 40px;
@@ -235,8 +246,12 @@ body.modal-open { overflow: hidden; }
   font-size: 1rem;
 }
 
+/* Capped independently of the panel — at 1200px wide, full-width
+   paragraphs would run past the point where the eye can find the
+   next line. */
 .modal-body {
   margin-top: 24px;
+  max-width: 70ch;
   font-family: var(--font-text);
   font-size: 1rem;
   line-height: 1.65;
