@@ -358,7 +358,7 @@ body.modal-open { overflow: hidden; }
 
 .modal-head {
   display: grid;
-  grid-template-columns: 1fr 1.35fr;
+  grid-template-columns: 2fr 1fr;
   gap: 36px;
   align-items: center;
 }
