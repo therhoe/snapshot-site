@@ -117,6 +117,9 @@ body.modal-open { overflow: hidden; }
   text-wrap: balance;
 }
 
+/* Same green as the card borders. */
+.hero-title .accent { color: var(--accent); }
+
 .logo {
   margin: 0;
   text-align: center;
