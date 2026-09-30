@@ -24,7 +24,6 @@
      height at every breakpoint instead of drifting apart. */
   --control-height: 54px;
   --line: #2a2a2a;
-  --logo-native-width: 1072px;
   --gutter: 20px;
   --maxw: 1280px;
 
@@ -76,11 +75,12 @@ body.modal-open { overflow: hidden; }
   flex: none;
 }
 
-/* Sized by height rather than width so it matches the buttons
-   opposite it. */
+/* Derived from the button height rather than set independently, so
+   the two stay in step at every breakpoint. Deliberately a little
+   shorter than the buttons. */
 .brand img {
   display: block;
-  height: var(--control-height);
+  height: calc(var(--control-height) - 8px);
   width: auto;
 }
 
