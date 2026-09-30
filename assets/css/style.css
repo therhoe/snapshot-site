@@ -182,6 +182,40 @@ body.modal-open { overflow: hidden; }
   outline-offset: 4px;
 }
 
+/* ---- questions ---- */
+
+.questions-section { padding: 0 0 72px; }
+
+.questions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.question {
+  padding: 11px 20px;
+  background: none;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  color: var(--fg);
+  font: inherit;
+  font-size: .95rem;
+  line-height: 1.3;
+  text-align: left;
+  cursor: pointer;
+  transition: border-color .15s ease, color .15s ease, background-color .15s ease;
+}
+
+.question:hover,
+.question:focus-visible {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+
 /* ---- card grid ---- */
 
 .grid-section { padding: 0 0 100px; }
@@ -249,6 +283,27 @@ body.modal-open { overflow: hidden; }
 .card:hover .card-image img,
 .card:focus-visible .card-image img {
   transform: scale(1.03);
+}
+
+/* Flashed when a question sends the reader to this card. */
+.card.is-highlighted .card-image {
+  animation: card-flash 2.4s ease-out;
+}
+
+@keyframes card-flash {
+  0%, 60% {
+    box-shadow: 0 0 0 5px rgba(133, 255, 151, .38);
+  }
+  100% {
+    box-shadow: 0 0 0 5px rgba(133, 255, 151, 0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card.is-highlighted .card-image {
+    animation: none;
+    box-shadow: 0 0 0 5px rgba(133, 255, 151, .38);
+  }
 }
 
 .card-title {

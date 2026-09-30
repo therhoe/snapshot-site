@@ -22,6 +22,12 @@
   var closeButton = modal.querySelector(".modal-close");
 
   var lastFocused = null;
+  var cardElements = [];
+  var highlightTimer = null;
+
+  var prefersReducedMotion = window.matchMedia
+    ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
+    : false;
 
   /* ---- render ---- */
 
@@ -144,6 +150,59 @@
     });
   }
 
+  /* ---- questions ----
+     Rendered from the same items the cards come from, so a question
+     can't end up pointing at a card that was renamed or removed. */
+
+  function revealCard(card) {
+    card.scrollIntoView({
+      behavior: prefersReducedMotion ? "auto" : "smooth",
+      block: "center"
+    });
+
+    // preventScroll, or focus() would jump instantly and fight the
+    // smooth scroll we just started.
+    card.focus({ preventScroll: true });
+
+    clearTimeout(highlightTimer);
+    cardElements.forEach(function (el) {
+      if (el) el.classList.remove("is-highlighted");
+    });
+    card.classList.add("is-highlighted");
+
+    highlightTimer = setTimeout(function () {
+      card.classList.remove("is-highlighted");
+    }, 2400);
+  }
+
+  function buildQuestions(items) {
+    var list = document.getElementById("questions");
+    var section = document.getElementById("questions-section");
+    if (!list || !section) return;
+
+    var asked = items
+      .map(function (item, index) { return { item: item, index: index }; })
+      .filter(function (entry) { return entry.item.question; });
+
+    if (!asked.length) return;
+
+    asked.forEach(function (entry) {
+      var li = document.createElement("li");
+      var button = document.createElement("button");
+      button.type = "button";
+      button.className = "question";
+      button.textContent = entry.item.question;
+      button.addEventListener("click", function () {
+        var card = cardElements[entry.index];
+        if (card) revealCard(card);
+      });
+      li.appendChild(button);
+      list.appendChild(li);
+    });
+
+    section.hidden = false;
+  }
+
   fetch("data/items.json")
     .then(function (response) {
       if (!response.ok) throw new Error("HTTP " + response.status);
@@ -174,7 +233,9 @@
         var grid = document.createElement("div");
         grid.className = "grid";
         group.indexes.forEach(function (index) {
-          grid.appendChild(buildCard(items[index], index));
+          var card = buildCard(items[index], index);
+          cardElements[index] = card;
+          grid.appendChild(card);
         });
 
         section.appendChild(grid);
@@ -182,6 +243,7 @@
       });
 
       root.appendChild(fragment);
+      buildQuestions(items);
 
       root.addEventListener("click", function (e) {
         var card = e.target.closest(".card");

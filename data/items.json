@@ -36,6 +36,7 @@
   },
   {
     "section": "Store Snapshot",
+    "question": "Which page should I focus on first?",
     "title": "Sessions by Page",
     "subtitle": "Pages metrics rank for CRO roadmap prioritization.",
     "image": "assets/img/cards/sessions-by-page.png",
