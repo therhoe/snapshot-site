@@ -53,7 +53,10 @@ body.modal-open { overflow: hidden; }
    grid on short screens. */
 .site-header {
   display: flex;
-  justify-content: flex-end;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
   width: 100%;
   max-width: var(--maxw);
   margin-inline: auto;
@@ -62,13 +65,36 @@ body.modal-open { overflow: hidden; }
 
 .site-header .buttons { margin-top: 0; }
 
+.brand {
+  display: block;
+  line-height: 0;
+  flex: none;
+}
+
+.brand img {
+  display: block;
+  width: 210px;
+  height: auto;
+}
+
 /* ---- hero ---- */
 
 .hero {
   display: grid;
   justify-items: center;
-  padding: 36px var(--gutter) 72px;
+  padding: 64px var(--gutter) 72px;
   text-align: center;
+}
+
+.hero-title {
+  margin: 0;
+  max-width: 22ch;
+  font-family: var(--font-display);
+  font-size: clamp(2.1rem, 5.2vw, 3.7rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -.03em;
+  text-wrap: balance;
 }
 
 .logo {
@@ -313,7 +339,8 @@ body.modal-open { overflow: hidden; }
   .logo img { width: 96vw; max-width: none; }
 
   .site-header { justify-content: center; padding-top: 18px; }
-  .hero { padding: 28px var(--gutter) 56px; }
+  .brand img { width: 240px; }
+  .hero { padding: 44px var(--gutter) 56px; }
 }
 
 @media (max-width: 720px) {
