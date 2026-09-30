@@ -23,7 +23,6 @@
 
   var lastFocused = null;
   var cardElements = [];
-  var highlightTimer = null;
 
   var prefersReducedMotion = window.matchMedia
     ? window.matchMedia("(prefers-reduced-motion: reduce)").matches
@@ -164,15 +163,14 @@
     // smooth scroll we just started.
     card.focus({ preventScroll: true });
 
-    clearTimeout(highlightTimer);
+    clearHighlight();
+    card.classList.add("is-highlighted");
+  }
+
+  function clearHighlight() {
     cardElements.forEach(function (el) {
       if (el) el.classList.remove("is-highlighted");
     });
-    card.classList.add("is-highlighted");
-
-    highlightTimer = setTimeout(function () {
-      card.classList.remove("is-highlighted");
-    }, 2400);
   }
 
   function buildQuestions(items) {
@@ -247,7 +245,10 @@
 
       root.addEventListener("click", function (e) {
         var card = e.target.closest(".card");
-        if (card) openModal(items[card.dataset.index], card);
+        if (!card) return;
+        // The highlight has done its job once the card is opened.
+        clearHighlight();
+        openModal(items[card.dataset.index], card);
       });
     })
     .catch(function (error) {

@@ -242,18 +242,22 @@ body.modal-open { overflow: hidden; }
   gap: 24px;
 }
 
+/* Padding is always present, not added on highlight, so switching the
+   background on doesn't shift the card's contents. */
 .card {
   display: flex;
   flex-direction: column;
   gap: 10px;
-  padding: 0;
+  padding: 12px;
   margin: 0;
   background: none;
   border: 0;
+  border-radius: 14px;
   color: inherit;
   font: inherit;
   text-align: left;
   cursor: pointer;
+  transition: background-color .2s ease, color .2s ease;
 }
 
 /* Fixed ratio reserves the space before the image loads, so the
@@ -285,26 +289,19 @@ body.modal-open { overflow: hidden; }
   transform: scale(1.03);
 }
 
-/* Flashed when a question sends the reader to this card. */
-.card.is-highlighted .card-image {
-  animation: card-flash 2.4s ease-out;
+/* Set when a question sends the reader to this card. Inverted rather
+   than outlined, and it stays until they open the card or pick a
+   different question. */
+.card.is-highlighted {
+  background: var(--fg);
+  color: var(--bg);
 }
 
-@keyframes card-flash {
-  0%, 60% {
-    box-shadow: 0 0 0 5px rgba(133, 255, 151, .38);
-  }
-  100% {
-    box-shadow: 0 0 0 5px rgba(133, 255, 151, 0);
-  }
-}
+.card.is-highlighted .card-subtitle { color: #444; }
 
-@media (prefers-reduced-motion: reduce) {
-  .card.is-highlighted .card-image {
-    animation: none;
-    box-shadow: 0 0 0 5px rgba(133, 255, 151, .38);
-  }
-}
+/* The frame's padding shows the page background by default, which
+   would stay black inside a white card. */
+.card.is-highlighted .card-image { background: var(--fg); }
 
 .card-title {
   font-family: var(--font-display);
