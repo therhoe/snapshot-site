@@ -304,13 +304,8 @@ body.modal-open { overflow: hidden; }
 
 .card.is-highlighted .card-subtitle { color: rgba(0, 0, 0, .68); }
 
-/* The frame's padding shows the page background by default, which
-   would stay black inside a filled card. Its green border also
-   vanishes into the fill, so it takes a dark edge instead. */
-.card.is-highlighted .card-image {
-  background: var(--accent);
-  border-color: rgba(0, 0, 0, .35);
-}
+/* The thumbnail frame keeps its black fill and green border when the
+   card is highlighted, so the image still sits on black. */
 
 .card-title {
   font-family: var(--font-display);
