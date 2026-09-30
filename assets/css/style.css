@@ -99,11 +99,16 @@ body.modal-open { overflow: hidden; }
 
 /* ---- hero ---- */
 
+/* Shares the container's max-width and gutter so the headline starts
+   on the same line as the logo, the cards and the dividers. */
 .hero {
   display: grid;
-  justify-items: center;
+  justify-items: start;
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
   padding: 64px var(--gutter) 72px;
-  text-align: center;
+  text-align: left;
 }
 
 .hero-title {
@@ -189,7 +194,7 @@ body.modal-open { overflow: hidden; }
 .questions {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: flex-start;
   gap: 12px;
   margin: 0;
   padding: 0;
@@ -441,7 +446,9 @@ body.modal-open { overflow: hidden; }
      unless it runs nearly edge to edge. Uncapped here on purpose. */
   .logo img { width: 96vw; max-width: none; }
 
-  .site-header { justify-content: center; padding-top: 18px; }
+  /* Left, not centred — the hero below it is left-aligned, and a
+     centred logo over a left-aligned headline reads as a mistake. */
+  .site-header { justify-content: flex-start; padding-top: 18px; }
   :root { --control-height: 46px; }
   .hero { padding: 44px var(--gutter) 56px; }
 }
