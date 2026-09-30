@@ -15,6 +15,7 @@
   if (!root) return;
 
   var modal = document.getElementById("modal");
+  var modalHead = modal.querySelector(".modal-head");
   var modalImage = modal.querySelector(".modal-image");
   var modalTitle = modal.querySelector(".modal-title");
   var modalSubtitle = modal.querySelector(".modal-subtitle");
@@ -77,6 +78,9 @@
     } else {
       modalImage.hidden = true;
     }
+    // Without an image the head has nothing to sit beside, so the
+    // text takes the full width instead of half of it.
+    modalHead.classList.toggle("is-textonly", !item.image);
 
     modalTitle.textContent = item.title || "";
 

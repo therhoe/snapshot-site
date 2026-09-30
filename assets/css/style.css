@@ -293,15 +293,19 @@ body.modal-open { overflow: hidden; }
    than outlined, and it stays until they open the card or pick a
    different question. */
 .card.is-highlighted {
-  background: var(--fg);
+  background: var(--accent);
   color: var(--bg);
 }
 
-.card.is-highlighted .card-subtitle { color: #444; }
+.card.is-highlighted .card-subtitle { color: rgba(0, 0, 0, .68); }
 
 /* The frame's padding shows the page background by default, which
-   would stay black inside a white card. */
-.card.is-highlighted .card-image { background: var(--fg); }
+   would stay black inside a filled card. Its green border also
+   vanishes into the fill, so it takes a dark edge instead. */
+.card.is-highlighted .card-image {
+  background: var(--accent);
+  border-color: rgba(0, 0, 0, .35);
+}
 
 .card-title {
   font-family: var(--font-display);
@@ -342,9 +346,31 @@ body.modal-open { overflow: hidden; }
   max-width: 1200px;
   max-height: calc(100vh - 2 * var(--gutter));
   overflow-y: auto;
-  padding: 40px;
+  /* Top padding clears the close button rather than letting it sit
+     over the image column. */
+  padding: 60px 40px 40px;
   background: #0b0b0b;
   border: 1px solid var(--line);
+  border-radius: var(--thumb-radius);
+}
+
+/* ---- modal: head ---- */
+
+.modal-head {
+  display: grid;
+  grid-template-columns: 1fr 1.35fr;
+  gap: 36px;
+  align-items: center;
+}
+
+/* Text takes the full width when an item has no image. */
+.modal-head.is-textonly { grid-template-columns: 1fr; }
+
+.modal-divider {
+  height: 0;
+  margin: 32px 0;
+  border: 0;
+  border-top: 1px solid var(--line);
 }
 
 .modal-close {
@@ -372,8 +398,8 @@ body.modal-open { overflow: hidden; }
   display: block;
   width: 100%;
   height: auto;
-  margin-bottom: 24px;
   border: 1px solid var(--line);
+  border-radius: var(--thumb-img-radius);
 }
 
 .modal-title {
@@ -395,7 +421,6 @@ body.modal-open { overflow: hidden; }
    paragraphs would run past the point where the eye can find the
    next line. */
 .modal-body {
-  margin-top: 24px;
   max-width: 70ch;
   font-family: var(--font-text);
   font-size: 1rem;
@@ -423,7 +448,9 @@ body.modal-open { overflow: hidden; }
 
 @media (max-width: 720px) {
   .grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
-  .modal-panel { padding: 28px 20px; }
+  .modal-panel { padding: 56px 20px 28px; }
+  .modal-head { grid-template-columns: 1fr; gap: 24px; }
+  .modal-divider { margin: 24px 0; }
 }
 
 @media (max-width: 420px) {
