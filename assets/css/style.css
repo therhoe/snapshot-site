@@ -61,6 +61,41 @@ a { color: inherit; }
   border-radius: 4px;
 }
 
+/* ---- review aid ----
+   The version switcher. Delete with the markup before launch. */
+
+.switch {
+  position: fixed;
+  right: 14px;
+  bottom: 14px;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 11px;
+  background: var(--bg-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  color: var(--muted);
+  font-size: .7rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.switch a {
+  padding: 2px 8px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-pill);
+  color: var(--muted-bright);
+  text-decoration: none;
+}
+
+.switch a[aria-current="page"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}
+
 /* ---- placeholders ----
    Unconfirmed Strategy Call details. Deliberately loud: these must
    not ship unnoticed, so they're outlined in amber rather than
@@ -238,9 +273,9 @@ a { color: inherit; }
 
 .hero-title {
   margin: 0;
-  max-width: 18ch;
+  max-width: 17ch;
   font-family: var(--font-display);
-  font-size: clamp(2.4rem, 6.4vw, 4.6rem);
+  font-size: clamp(2.7rem, 7.6vw, 5.9rem);
   font-weight: 700;
   /* Under 1 on purpose — at display size the default gap stops the
      headline reading as a single block. */
@@ -270,7 +305,7 @@ a { color: inherit; }
 .band-title {
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(1.9rem, 4vw, 3rem);
+  font-size: clamp(2.3rem, 5.2vw, 4rem);
   font-weight: 700;
   line-height: 1.04;
   letter-spacing: -.03em;
@@ -546,7 +581,7 @@ a { color: inherit; }
 .closing-title {
   margin: 0;
   font-family: var(--font-display);
-  font-size: clamp(1.8rem, 4.2vw, 3rem);
+  font-size: clamp(2.2rem, 5.6vw, 4rem);
   font-weight: 700;
   line-height: 1.05;
   letter-spacing: -.03em;

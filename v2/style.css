@@ -1,0 +1,696 @@
+/* ============================================================
+   Snapshot CRO — v2, the technical-document look.
+
+   IBM Plex Mono at every size, amber accent, graph-paper grid
+   behind everything, and no rounded corners anywhere. The page
+   should read like a spec sheet that happens to sell something.
+
+   Self-contained: this file owes nothing to the root stylesheet,
+   so the three versions can be compared without one leaking into
+   another.
+   ============================================================ */
+
+:root {
+  --bg: #ffffff;
+  --bg-raised: #faf9f6;       /* panels sitting on the grid */
+  --fg: #15161a;
+
+  /* The amber has to do two jobs and can only do one of them well.
+     #FCC42A on white is about 1.8:1 — fine as a FILL behind dark
+     text, unreadable AS text. So fills use --accent and anything
+     set in the accent colour uses --accent-deep, which is the same
+     hue carried down to a legible value. */
+  --accent: #FCC42A;          /* fills: buttons, letter blocks */
+  --accent-deep: #8a6000;     /* the same amber, as text on white */
+  --accent-ink: #15161a;      /* text on a filled accent button */
+
+  --muted: #6e717a;
+  --muted-bright: #43464d;    /* body copy — darker, not lighter, here */
+
+  --line: #e2e1da;            /* panel borders */
+  --grid-line: rgba(21, 22, 26, .055);
+  --grid-size: 32px;
+
+  --control-height: 46px;
+  --gutter: 24px;
+  --maxw: 1180px;
+  --measure: 74ch;            /* mono is wide, so the measure runs long */
+
+  --font: "IBM Plex Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+* { box-sizing: border-box; }
+
+/* The graph paper. Fixed rather than scrolling with the content, so
+   it reads as paper the page is printed on instead of a texture
+   stuck to the page. */
+body {
+  position: relative;
+  margin: 0;
+  background-color: var(--bg);
+  background-image:
+    linear-gradient(var(--grid-line) 1px, transparent 1px),
+    linear-gradient(90deg, var(--grid-line) 1px, transparent 1px);
+  background-size: var(--grid-size) var(--grid-size);
+  background-attachment: fixed;
+  color: var(--fg);
+  font-family: var(--font);
+  font-size: 15px;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+}
+
+p { margin: 0 0 1em; }
+p:last-child { margin-bottom: 0; }
+
+a { color: inherit; }
+
+:focus-visible {
+  outline: 2px solid var(--accent-deep);
+  outline-offset: 2px;
+}
+
+/* ---- review aid ----
+   The version switcher. Delete with the markup before launch. */
+
+.switch {
+  position: fixed;
+  right: 12px;
+  bottom: 12px;
+  z-index: 60;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 7px 10px;
+  background: var(--bg-raised);
+  border: 1px solid var(--line);
+  color: var(--muted);
+  font-size: .72rem;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+}
+
+.switch a {
+  padding: 2px 6px;
+  border: 1px solid var(--line);
+  color: var(--muted-bright);
+  text-decoration: none;
+}
+
+.switch a[aria-current="page"] {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}
+
+/* ---- placeholders ----
+   Unconfirmed Strategy Call details. They must not ship unnoticed,
+   so they're loud on purpose. */
+
+.tbd {
+  display: inline-block;
+  padding: 0 6px;
+  border: 1px dashed #c2341a;
+  color: #c2341a;
+  font-size: .92em;
+}
+
+/* ---- shared layout ---- */
+
+.site-header,
+.hero,
+.band,
+.closing,
+.site-footer {
+  position: relative;
+  width: 100%;
+  max-width: var(--maxw);
+  margin-inline: auto;
+  padding-inline: var(--gutter);
+}
+
+/* Every band is a ruled box rather than a section separated by
+   whitespace — the ruled edges are most of the look. */
+.band,
+.hero {
+  border-left: 1px solid var(--line);
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: rgba(255, 255, 255, .7);
+}
+
+.eyebrow {
+  margin: 0 0 16px;
+  color: var(--accent-deep);
+  font-size: .78rem;
+  letter-spacing: .1em;
+}
+
+/* ---- header ---- */
+
+.site-header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  padding-block: 18px;
+  border: 1px solid var(--line);
+  background: rgba(255, 255, 255, .7);
+}
+
+ /* The wordmark is white with a green "n", drawn for a dark page.
+   On white stock it would simply vanish, so it sits in a black
+   block — which on a spec sheet reads as a printed label anyway. */
+.brand {
+  display: block;
+  flex: none;
+  padding: 9px 13px;
+  line-height: 0;
+  background: #0b0c0e;
+}
+
+.brand img {
+  display: block;
+  height: calc(var(--control-height) - 16px);
+  width: auto;
+}
+
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 10px;
+}
+
+.nav-link {
+  padding: 0 10px;
+  color: var(--muted-bright);
+  text-decoration: none;
+  font-size: .86rem;
+  letter-spacing: .04em;
+}
+
+.nav-link::before { content: "/ "; color: var(--muted); }
+
+.nav-link:hover,
+.nav-link:focus-visible { color: var(--accent-deep); }
+
+/* ---- buttons ----
+   Square, bracketed, and filled amber only for the Strategy Call —
+   the page's one conversion. */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--control-height);
+  padding: 0 18px;
+  border: 1px solid var(--line);
+  background: none;
+  color: var(--fg);
+  font-family: var(--font);
+  font-size: .86rem;
+  font-weight: 500;
+  line-height: 1;
+  letter-spacing: .04em;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color .12s linear, color .12s linear,
+              border-color .12s linear;
+}
+
+.btn::before { content: "["; margin-right: .5em; opacity: .55; }
+.btn::after  { content: "]"; margin-left: .5em;  opacity: .55; }
+
+.btn-primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+  font-weight: 600;
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible {
+  background: var(--fg);
+  border-color: var(--fg);
+}
+
+.btn-ghost:hover,
+.btn-ghost:focus-visible {
+  border-color: var(--accent-deep);
+  color: var(--accent-deep);
+}
+
+.btn-lg { height: 52px; padding: 0 22px; font-size: .92rem; }
+.btn-block { display: flex; width: 100%; }
+
+.cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 32px;
+}
+
+.cta-note {
+  margin: 18px 0 0;
+  color: var(--muted);
+  font-size: .8rem;
+  letter-spacing: .04em;
+}
+
+/* ---- hero ---- */
+
+.hero { padding-block: clamp(48px, 7vw, 86px); }
+
+/* Mono has no display cut, so the headline leans on size and tight
+   tracking rather than on a heavier face. */
+.hero-title {
+  margin: 0;
+  font-size: clamp(2.2rem, 5.8vw, 4.3rem);
+  font-weight: 600;
+  line-height: 1.06;
+  letter-spacing: -.03em;
+}
+
+.hero-sub {
+  max-width: var(--measure);
+  margin: 26px 0 0;
+  color: var(--muted-bright);
+  font-size: clamp(.94rem, 1.2vw, 1.02rem);
+}
+
+.hero-sub strong {
+  color: var(--accent-deep);
+  font-weight: 500;
+}
+
+/* ---- bands ---- */
+
+.band { padding-block: clamp(48px, 7vw, 80px); }
+
+.band-head { margin-bottom: clamp(32px, 4vw, 48px); }
+
+.band-title {
+  margin: 0;
+  font-size: clamp(1.9rem, 4.2vw, 3.1rem);
+  font-weight: 600;
+  line-height: 1.1;
+  letter-spacing: -.02em;
+}
+
+.band-sub {
+  max-width: var(--measure);
+  margin: 16px 0 0;
+  color: var(--muted-bright);
+  font-size: .96rem;
+}
+
+/* ---- PACE stages ---- */
+
+/* A hairline gap over a ruled background reads as a single table
+   with dividers rather than as four detached cards. */
+.stages {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  margin: 0;
+  padding: 0;
+  background: var(--line);
+  border: 1px solid var(--line);
+  list-style: none;
+}
+
+.stage {
+  padding: 26px;
+  background: var(--bg-raised);
+}
+
+.stage-key {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 0 0 14px;
+  color: var(--muted);
+  font-size: .76rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.stage-letter {
+  display: grid;
+  place-items: center;
+  width: 26px;
+  height: 26px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-size: .9rem;
+  font-weight: 600;
+}
+
+.stage-name {
+  margin: 0;
+  font-size: 1.3rem;
+  font-weight: 600;
+  letter-spacing: -.01em;
+}
+
+.stage-line {
+  margin: 4px 0 14px;
+  color: var(--accent-deep);
+  font-size: .88rem;
+}
+
+.stage-body {
+  margin: 0;
+  color: var(--muted-bright);
+  font-size: .92rem;
+}
+
+.stage-list {
+  margin: 16px 0 0;
+  padding: 16px 0 0;
+  border-top: 1px dashed var(--line);
+  list-style: none;
+  color: var(--muted);
+  font-size: .86rem;
+}
+
+.stage-list li::before { content: "- "; }
+.stage-list li + li { margin-top: 4px; }
+.stage-list span { color: var(--fg); }
+
+/* ---- PACE mapped onto the app ----
+   A real table: the content is genuinely two columns of paired
+   values, and the look wants ruled cells anyway. */
+
+.maps {
+  width: 100%;
+  border-collapse: collapse;
+  border: 1px solid var(--line);
+  text-align: left;
+}
+
+.maps th,
+.maps td {
+  padding: 16px;
+  border: 1px solid var(--line);
+  vertical-align: top;
+}
+
+.maps thead th {
+  background: var(--bg-raised);
+  color: var(--muted);
+  font-size: .76rem;
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.maps tbody th {
+  width: 170px;
+  color: var(--fg);
+  font-size: .94rem;
+  font-weight: 600;
+  white-space: nowrap;
+}
+
+.maps tbody th span {
+  display: inline-grid;
+  place-items: center;
+  width: 22px;
+  height: 22px;
+  margin-right: 8px;
+  background: var(--accent);
+  color: var(--accent-ink);
+  font-size: .8rem;
+  vertical-align: -5px;
+}
+
+.maps td {
+  color: var(--muted-bright);
+  font-size: .92rem;
+}
+
+.maps td strong {
+  display: block;
+  margin-bottom: 4px;
+  color: var(--fg);
+  font-weight: 500;
+}
+
+/* ---- the snapshot method ---- */
+
+.method {
+  max-width: var(--measure);
+  margin-top: 32px;
+  padding: 24px;
+  background: var(--bg-raised);
+  border: 1px solid var(--line);
+  border-left: 2px solid var(--accent);
+  color: var(--muted-bright);
+  font-size: .92rem;
+}
+
+.method-title {
+  margin: 0 0 12px;
+  color: var(--accent-deep);
+  font-size: .96rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+}
+
+/* Scrolls rather than wraps: broken across lines the arrows stop
+   reading as one pipeline. */
+.method-flow {
+  margin: 14px 0 0;
+  padding: 12px;
+  overflow-x: auto;
+  background: var(--bg);
+  border: 1px dashed var(--line);
+  color: var(--accent-deep);
+  font-size: .84rem;
+  white-space: nowrap;
+}
+
+.pricing {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  margin-top: 28px;
+}
+
+.pricing-line {
+  margin: 0;
+  color: var(--muted-bright);
+  font-size: .94rem;
+}
+
+.pricing-line strong { color: var(--fg); font-weight: 600; }
+
+/* ---- the offer ---- */
+
+.offer-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: 32px;
+  align-items: start;
+}
+
+.offer-h {
+  margin: 0 0 14px;
+  color: var(--accent-deep);
+  font-size: .96rem;
+  font-weight: 600;
+  letter-spacing: .02em;
+}
+
+.offer-h::before { content: "// "; opacity: .6; }
+
+.offer-h + p { color: var(--muted-bright); font-size: .94rem; }
+
+.offer-steps {
+  margin: 0 0 32px;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+}
+
+.offer-steps li {
+  position: relative;
+  counter-increment: step;
+  padding: 0 0 16px 42px;
+  color: var(--muted-bright);
+  font-size: .94rem;
+}
+
+/* Zero-padded, because of course it is. */
+.offer-steps li::before {
+  content: counter(step, decimal-leading-zero);
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 24px;
+  border: 1px solid var(--accent-deep);
+  color: var(--accent-deep);
+  font-size: .78rem;
+}
+
+.offer-steps strong {
+  display: block;
+  color: var(--fg);
+  font-weight: 600;
+}
+
+.offer-card {
+  position: sticky;
+  top: 20px;
+  padding: 22px;
+  background: var(--bg-raised);
+  border: 1px solid var(--line);
+}
+
+.offer-card-head {
+  margin: 0 0 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px dashed var(--line);
+  color: var(--muted);
+  font-size: .76rem;
+  letter-spacing: .1em;
+}
+
+.offer-facts { margin: 0 0 20px; padding: 0; }
+
+.offer-facts > div {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2px;
+  padding: 11px 0;
+  border-bottom: 1px dashed var(--line);
+}
+
+.offer-facts > div:first-child { padding-top: 0; }
+
+.offer-facts dt {
+  color: var(--muted);
+  font-size: .74rem;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.offer-facts dd { margin: 0; font-size: .9rem; }
+
+.offer-note {
+  margin: 12px 0 0;
+  color: var(--muted);
+  font-size: .78rem;
+  text-align: center;
+}
+
+/* ---- closing ---- */
+
+.closing {
+  padding-block: clamp(56px, 8vw, 92px);
+  border: 1px solid var(--line);
+  border-top: 0;
+  background: rgba(255, 255, 255, .7);
+  text-align: center;
+}
+
+.closing-title {
+  margin: 0;
+  font-size: clamp(1.8rem, 4.4vw, 3.1rem);
+  font-weight: 600;
+  line-height: 1.15;
+  letter-spacing: -.02em;
+}
+
+.closing .cta-row { justify-content: center; }
+
+/* ---- footer ---- */
+
+.site-footer {
+  padding-block: 32px 48px;
+  color: var(--muted);
+  font-size: .8rem;
+  letter-spacing: .03em;
+}
+
+.site-footer p { max-width: var(--measure); }
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-top: 12px;
+}
+
+.footer-links a {
+  color: var(--muted-bright);
+  text-decoration: none;
+}
+
+.footer-links a::before { content: "/ "; color: var(--muted); }
+
+.footer-links a:hover,
+.footer-links a:focus-visible { color: var(--accent-deep); }
+
+/* ---- responsive ---- */
+
+@media (max-width: 900px) {
+  .offer-grid { grid-template-columns: 1fr; gap: 26px; }
+
+  /* Sticky is pointless once the card is stacked under the steps. */
+  .offer-card { position: static; }
+}
+
+@media (max-width: 760px) {
+  :root { --gutter: 16px; --grid-size: 24px; }
+
+  .nav-link { display: none; }
+
+  .stages { grid-template-columns: 1fr; }
+
+  /* The two-column table can't shrink below its own row labels, so
+     below this width each row becomes a stacked block instead. */
+  .maps thead { display: none; }
+
+  .maps,
+  .maps tbody,
+  .maps tr,
+  .maps th,
+  .maps td { display: block; width: auto; }
+
+  .maps tr + tr { margin-top: -1px; }
+  .maps tbody th { border-bottom: 0; white-space: normal; }
+
+  .stage, .method, .offer-card { padding: 18px; }
+
+  .cta-row .btn { flex: 1 1 100%; }
+
+  /* Long labels can't stay on one line at phone widths — the app
+     store button is wider than a 320px screen on its own. Let them
+     wrap, and give the one outside .cta-row the full width too. */
+  .btn {
+    height: auto;
+    min-height: var(--control-height);
+    padding-block: 10px;
+    white-space: normal;
+    text-align: center;
+  }
+
+  .pricing { display: block; }
+  .pricing .btn { display: flex; width: 100%; margin-top: 14px; }
+
+  .switch { right: 8px; bottom: 8px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * { transition-duration: .01ms !important; }
+}
