@@ -1,31 +1,36 @@
 /* ============================================================
-   snapshot cro — shared styles
-   Loaded by every page. Design direction is Shep's; this file
-   holds the structural shell only.
+   Snapshot CRO — landing page
+
+   One page, three jobs in order: teach PACE, show what the app
+   measures, sell the Strategy Call. The call is the primary
+   conversion, so it gets the only filled buttons on the page.
+
+   Tokens below are the whole design system — the black, the green
+   from the wordmark, and Space Grotesk at every size.
    ============================================================ */
 
 :root {
   --bg: #000;
+  --bg-raised: #0b0b0b;       /* cards sitting on the page */
   --fg: #fff;
   --accent: #85ff97;          /* the green from the wordmark's "n" */
+  --accent-ink: #000;         /* text on a filled accent button */
 
-  /* Card thumbnails. The image is deliberately clipped: it sits
-     inset from the top-left and runs off the right and bottom, so
-     the card shows a stylized corner rather than the whole shot.
-     Tune these two to change how much shows. */
-  --thumb-pad: 12%;           /* inset on the top and left only */
-  --thumb-zoom: 150%;         /* image width relative to the frame */
-  --thumb-radius: 12px;       /* the green frame's corners */
-  --thumb-img-radius: 8px;    /* the screenshot's own corners */
   --muted: #8a8a8a;
-  --muted-bright: #b4b4b4;    /* hero subtext — a step up from --muted */
+  --muted-bright: #b4b4b4;    /* body copy — a step up from --muted */
 
-  /* Header logo and header buttons share this, so they stay the same
-     height at every breakpoint instead of drifting apart. */
-  --control-height: 54px;
   --line: #2a2a2a;
-  --gutter: 20px;
-  --maxw: 1280px;
+
+  /* Logo and buttons share this so they stay the same height at
+     every breakpoint instead of drifting apart. */
+  --control-height: 52px;
+
+  --gutter: 24px;
+  --maxw: 1180px;
+  --measure: 68ch;            /* cap on anything that reads as prose */
+
+  --radius: 16px;
+  --radius-pill: 999px;
 
   /* One family at every size. Swap these two to change the whole
      site's type; nothing else references a font name. */
@@ -40,21 +45,75 @@ body {
   background: var(--bg);
   color: var(--fg);
   font-family: var(--font-text);
+  font-size: 16px;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
 }
 
-body.modal-open { overflow: hidden; }
+p { margin: 0 0 1em; }
+p:last-child { margin-bottom: 0; }
 
-.container {
+a { color: inherit; }
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* ---- placeholders ----
+   Unconfirmed Strategy Call details. Deliberately loud: these must
+   not ship unnoticed, so they're outlined in amber rather than
+   styled to blend in. Delete the class with the guesswork. */
+
+.tbd {
+  display: inline-block;
+  padding: 1px 8px;
+  border: 1px dashed #ffc42a;
+  border-radius: 6px;
+  color: #ffc42a;
+  font-size: .92em;
+  font-style: normal;
+}
+
+/* ---- shared layout ---- */
+
+.site-header,
+.hero,
+.band,
+.closing,
+.site-footer {
   width: 100%;
   max-width: var(--maxw);
   margin-inline: auto;
   padding-inline: var(--gutter);
 }
 
+/* Inset by the gutter rather than set as a border on the section, so
+   the line ends where the content does instead of running out to the
+   padding edge. */
+.rule {
+  width: 100%;
+  max-width: calc(var(--maxw) - 2 * var(--gutter));
+  height: 0;
+  margin: 0 auto;
+  border: 0;
+  border-top: 1px solid var(--line);
+}
+
+.eyebrow {
+  margin: 0 0 14px;
+  color: var(--accent);
+  font-size: .82rem;
+  font-weight: 500;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+}
+
 /* ---- header ---- */
 
-/* Sits in normal flow rather than fixed, so it never overlaps the
-   grid on short screens. */
+/* Normal flow rather than fixed, so it never overlaps content on
+   short screens. */
 .site-header {
   position: relative;
   display: flex;
@@ -62,15 +121,9 @@ body.modal-open { overflow: hidden; }
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  width: 100%;
-  max-width: var(--maxw);
-  margin-inline: auto;
-  padding: 22px var(--gutter);
+  padding-block: 20px;
 }
 
-/* Inset by the gutter rather than set as a border on the header, so
-   the line ends exactly where the card grid does instead of running
-   out to the padding edge. */
 .site-header::after {
   content: "";
   position: absolute;
@@ -80,383 +133,484 @@ body.modal-open { overflow: hidden; }
   border-bottom: 1px solid var(--line);
 }
 
-.site-header .buttons { margin-top: 0; }
-
 .brand {
   display: block;
   line-height: 0;
   flex: none;
 }
 
-/* Derived from the button height rather than set independently, so
-   the two stay in step at every breakpoint. Deliberately a little
-   shorter than the buttons. */
+/* Derived from the control height rather than set independently, so
+   the logo and the buttons stay in step at every breakpoint. */
 .brand img {
   display: block;
-  height: calc(var(--control-height) - 8px);
+  height: calc(var(--control-height) - 10px);
   width: auto;
+}
+
+.site-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.nav-link {
+  padding: 0 14px;
+  color: var(--muted-bright);
+  text-decoration: none;
+  font-size: .98rem;
+  transition: color .15s ease;
+}
+
+.nav-link:hover,
+.nav-link:focus-visible { color: var(--fg); }
+
+/* ---- buttons ----
+   Filled green is reserved for the Strategy Call, the page's one
+   conversion. Everything else is a ghost button, so the hierarchy
+   is visible rather than just intended. */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--control-height);
+  padding: 0 24px;
+  border: 2px solid transparent;
+  border-radius: var(--radius-pill);
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 1rem;
+  line-height: 1;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  cursor: pointer;
+  transition: background-color .15s ease, color .15s ease,
+              border-color .15s ease;
+}
+
+.btn-primary {
+  background: var(--accent);
+  border-color: var(--accent);
+  color: var(--accent-ink);
+}
+
+.btn-primary:hover,
+.btn-primary:focus-visible {
+  background: #fff;
+  border-color: #fff;
+}
+
+.btn-ghost {
+  background: none;
+  border-color: var(--line);
+  color: var(--fg);
+}
+
+.btn-ghost:hover,
+.btn-ghost:focus-visible { border-color: var(--fg); }
+
+.btn-lg {
+  height: calc(var(--control-height) + 6px);
+  padding: 0 30px;
+  font-size: 1.05rem;
+}
+
+.btn-block { display: flex; width: 100%; }
+
+.cta-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 36px;
+}
+
+.cta-note {
+  margin: 20px 0 0;
+  color: var(--muted);
+  font-size: .92rem;
 }
 
 /* ---- hero ---- */
 
-/* Shares the container's max-width and gutter so the headline starts
-   on the same line as the logo, the cards and the dividers. */
-.hero {
-  display: grid;
-  justify-items: start;
-  width: 100%;
-  max-width: var(--maxw);
-  margin-inline: auto;
-  padding: 64px var(--gutter) 72px;
-  text-align: left;
-}
+.hero { padding-block: clamp(56px, 9vw, 104px) clamp(56px, 8vw, 92px); }
 
 .hero-title {
   margin: 0;
-  max-width: 22ch;
+  max-width: 18ch;
   font-family: var(--font-display);
-  font-size: clamp(2.1rem, 5.2vw, 3.7rem);
+  font-size: clamp(2.4rem, 6.4vw, 4.6rem);
   font-weight: 700;
-  line-height: 1.05;
-  letter-spacing: -.03em;
-  text-wrap: balance;
-}
-
-/* Same green as the card borders. */
-.hero-title .accent { color: var(--accent); }
-
-.logo {
-  margin: 0;
-  text-align: center;
-}
-
-.logo img {
-  display: block;
-  width: 92vw;
-  max-width: 1200px;
-  height: auto;
+  /* Under 1 on purpose — at display size the default gap stops the
+     headline reading as a single block. */
+  line-height: .99;
+  letter-spacing: -.035em;
 }
 
 .hero-sub {
-  max-width: 62ch;
-  margin: 32px 0 0;
+  max-width: var(--measure);
+  margin: 28px 0 0;
   color: var(--muted-bright);
-  font-size: clamp(1rem, 1.5vw, 1.12rem);
-  line-height: 1.6;
+  font-size: clamp(1.05rem, 1.6vw, 1.22rem);
+  line-height: 1.58;
 }
 
-.logo a {
-  display: inline-block;
-  line-height: 0;
-}
-
-/* ---- buttons ---- */
-
-.buttons {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 16px;
-  margin-top: 40px;
-}
-
-.buttons a {
-  display: inline-flex;
-  align-items: center;
-  height: var(--control-height);
-  padding: 0 28px;
-  border: 2px solid var(--fg);
-  border-radius: 999px;
+.hero-sub strong {
   color: var(--fg);
-  text-decoration: none;
-  font-family: var(--font-display);
   font-weight: 500;
-  font-size: clamp(.95rem, 1.6vw, 1.15rem);
-  letter-spacing: .02em;
-  transition: background-color .15s ease, color .15s ease;
 }
 
-.buttons a:hover,
-.buttons a:focus-visible {
-  background: var(--fg);
-  color: var(--bg);
+/* ---- bands ---- */
+
+.band { padding-block: clamp(56px, 8vw, 96px); }
+
+.band-head { margin-bottom: clamp(36px, 5vw, 60px); }
+
+.band-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.9rem, 4vw, 3rem);
+  font-weight: 700;
+  line-height: 1.04;
+  letter-spacing: -.03em;
 }
 
-:focus-visible {
-  outline: 2px solid var(--accent);
-  outline-offset: 4px;
+.band-sub {
+  max-width: var(--measure);
+  margin: 18px 0 0;
+  color: var(--muted-bright);
+  font-size: clamp(1rem, 1.4vw, 1.1rem);
 }
 
-/* ---- questions ---- */
+/* ---- PACE stages ---- */
 
-.questions-section { padding: 0 0 72px; }
-
-.questions {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: flex-start;
-  gap: 12px;
+.stages {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
-.question {
-  padding: 11px 20px;
-  background: none;
+.stage {
+  padding: 28px;
+  background: var(--bg-raised);
   border: 1px solid var(--line);
-  border-radius: 999px;
-  color: var(--fg);
-  font: inherit;
-  font-size: .95rem;
-  line-height: 1.3;
-  text-align: left;
-  cursor: pointer;
-  transition: border-color .15s ease, color .15s ease, background-color .15s ease;
+  border-radius: var(--radius);
 }
 
-.question:hover,
-.question:focus-visible {
-  border-color: var(--accent);
+/* Decorative — the letter is already in the heading beside it, so
+   it's aria-hidden in the markup and purely a visual anchor here. */
+.stage-letter {
+  margin: 0 0 6px;
+  color: var(--accent);
+  font-family: var(--font-display);
+  font-size: 2.6rem;
+  font-weight: 700;
+  line-height: 1;
+  letter-spacing: -.04em;
+}
+
+.stage-name {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.45rem;
+  font-weight: 700;
+  letter-spacing: -.02em;
+}
+
+.stage-line {
+  margin: 6px 0 14px;
+  color: var(--accent);
+  font-size: 1rem;
+}
+
+.stage-body {
+  margin: 0;
+  color: var(--muted-bright);
+  font-size: .98rem;
+}
+
+.stage-list {
+  margin: 18px 0 0;
+  padding: 18px 0 0;
+  border-top: 1px solid var(--line);
+  list-style: none;
+  color: var(--muted);
+  font-size: .94rem;
+}
+
+.stage-list li + li { margin-top: 6px; }
+.stage-list span { color: var(--fg); }
+
+/* ---- PACE mapped onto the app ---- */
+
+.maps {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.map {
+  padding: 26px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.map-stage {
+  margin: 0 0 10px;
+  color: var(--muted);
+  font-size: .82rem;
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+
+.map-stage span {
+  display: inline-grid;
+  place-items: center;
+  width: 24px;
+  height: 24px;
+  margin-right: 8px;
+  background: var(--accent);
+  border-radius: 50%;
+  color: var(--accent-ink);
+  font-size: .86rem;
+  font-weight: 700;
+  vertical-align: -6px;
+}
+
+.map-what {
+  margin: 0 0 10px;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 500;
+  letter-spacing: -.01em;
+}
+
+.map-body {
+  margin: 0;
+  color: var(--muted-bright);
+  font-size: .98rem;
+}
+
+/* ---- the snapshot method ---- */
+
+.method {
+  max-width: var(--measure);
+  margin-top: 40px;
+  padding: 28px;
+  background: var(--bg-raised);
+  border: 1px solid var(--line);
+  border-left: 3px solid var(--accent);
+  border-radius: var(--radius);
+  color: var(--muted-bright);
+}
+
+.method-title {
+  margin: 0 0 12px;
+  color: var(--fg);
+  font-family: var(--font-display);
+  font-size: 1.25rem;
+  font-weight: 700;
+  letter-spacing: -.02em;
+}
+
+.pricing {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 18px;
+  margin-top: 32px;
+}
+
+.pricing-line {
+  margin: 0;
+  color: var(--muted-bright);
+  font-size: 1.02rem;
+}
+
+.pricing-line strong { color: var(--fg); }
+
+/* ---- the offer ---- */
+
+.offer-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
+  gap: 36px;
+  align-items: start;
+}
+
+.offer-h {
+  margin: 0 0 14px;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 700;
+  letter-spacing: -.02em;
+}
+
+.offer-h + p { color: var(--muted-bright); }
+
+.offer-steps {
+  margin: 0 0 36px;
+  padding: 0;
+  list-style: none;
+  counter-reset: step;
+}
+
+.offer-steps li {
+  position: relative;
+  counter-increment: step;
+  padding: 0 0 18px 44px;
+  color: var(--muted-bright);
+}
+
+.offer-steps li::before {
+  content: counter(step);
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  border: 1px solid var(--accent);
+  border-radius: 50%;
+  color: var(--accent);
+  font-size: .88rem;
+  font-weight: 500;
+}
+
+.offer-steps strong {
+  display: block;
+  color: var(--fg);
+  font-weight: 500;
+}
+
+/* Sticks while the steps beside it scroll, so the price and the
+   button stay in reach through the whole section. */
+.offer-card {
+  position: sticky;
+  top: 24px;
+  padding: 28px;
+  background: var(--bg-raised);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+
+.offer-facts {
+  margin: 0 0 24px;
+  padding: 0;
+}
+
+.offer-facts > div {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--line);
+}
+
+.offer-facts > div:first-child { padding-top: 0; }
+
+.offer-facts dt {
+  margin-bottom: 6px;
+  color: var(--muted);
+  font-size: .8rem;
+  font-weight: 500;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.offer-facts dd {
+  margin: 0;
+  font-size: 1rem;
+}
+
+.offer-note {
+  margin: 14px 0 0;
+  color: var(--muted);
+  font-size: .88rem;
+  text-align: center;
+}
+
+/* ---- closing ---- */
+
+.closing {
+  padding-block: clamp(64px, 9vw, 110px);
+  text-align: center;
+}
+
+.closing-title {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 4.2vw, 3rem);
+  font-weight: 700;
+  line-height: 1.05;
+  letter-spacing: -.03em;
+}
+
+.closing .cta-row { justify-content: center; }
+
+/* ---- footer ---- */
+
+.site-footer {
+  padding-block: 40px 56px;
+  border-top: 1px solid var(--line);
+  color: var(--muted);
+  font-size: .92rem;
+}
+
+.site-footer p { max-width: var(--measure); }
+
+.footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: 14px;
+}
+
+.footer-links a {
+  color: var(--muted-bright);
+  text-decoration: none;
+}
+
+.footer-links a:hover,
+.footer-links a:focus-visible {
   color: var(--accent);
 }
 
-/* ---- card grid ---- */
-
-.grid-section { padding: 0 0 100px; }
-
-.group-title {
-  margin: 0 0 24px;
-  font-family: var(--font-display);
-  font-size: clamp(1.4rem, 2.6vw, 2rem);
-  font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -.02em;
-}
-
-.group-divider {
-  height: 0;
-  margin: 64px 0;
-  border: 0;
-  border-top: 1px solid var(--line);
-}
-
-.grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 24px;
-}
-
-/* Padding is always present, not added on highlight, so switching the
-   background on doesn't shift the card's contents. */
-.card {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  padding: 12px;
-  margin: 0;
-  background: none;
-  border: 0;
-  border-radius: 14px;
-  color: inherit;
-  font: inherit;
-  text-align: left;
-  cursor: pointer;
-  transition: background-color .2s ease, color .2s ease;
-}
-
-/* Fixed ratio reserves the space before the image loads, so the
-   grid doesn't jump as cards fill in. */
-.card-image {
-  display: block;
-  aspect-ratio: 4 / 3;
-  padding: var(--thumb-pad) 0 0 var(--thumb-pad);
-  background: var(--bg);
-  border: 2px solid var(--accent);
-  border-radius: var(--thumb-radius);
-  overflow: hidden;
-}
-
-/* Anchored top-left at its own scale — whatever falls outside the
-   frame on the right and bottom is clipped away. */
-.card-image img {
-  display: block;
-  width: var(--thumb-zoom);
-  max-width: none;
-  height: auto;
-  border-radius: var(--thumb-img-radius);
-  transition: transform .25s ease;
-  transform-origin: top left;
-}
-
-.card:hover .card-image img,
-.card:focus-visible .card-image img {
-  transform: scale(1.03);
-}
-
-/* Set when a question sends the reader to this card. Inverted rather
-   than outlined, and it stays until they open the card or pick a
-   different question. */
-.card.is-highlighted {
-  background: var(--accent);
-  color: var(--bg);
-}
-
-.card.is-highlighted .card-subtitle { color: rgba(0, 0, 0, .68); }
-
-/* The thumbnail frame keeps its black fill and green border when the
-   card is highlighted, so the image still sits on black. */
-
-.card-title {
-  font-family: var(--font-display);
-  font-weight: 500;
-  font-size: 1.1rem;
-  line-height: 1.2;
-}
-
-.card-subtitle {
-  color: var(--muted);
-  font-size: .9rem;
-  line-height: 1.3;
-}
-
-.grid-error {
-  grid-column: 1 / -1;
-  color: var(--muted);
-}
-
-/* ---- modal ---- */
-
-.modal {
-  position: fixed;
-  inset: 0;
-  z-index: 100;
-  display: grid;
-  place-items: center;
-  padding: var(--gutter);
-  background: rgba(0, 0, 0, .85);
-  overflow-y: auto;
-}
-
-.modal[hidden] { display: none; }
-
-.modal-panel {
-  position: relative;
-  width: 100%;
-  max-width: 1200px;
-  max-height: calc(100vh - 2 * var(--gutter));
-  overflow-y: auto;
-  /* Top padding clears the close button rather than letting it sit
-     over the image column. */
-  padding: 60px 40px 40px;
-  background: #0b0b0b;
-  border: 1px solid var(--line);
-  border-radius: var(--thumb-radius);
-}
-
-/* ---- modal: head ---- */
-
-.modal-head {
-  display: grid;
-  grid-template-columns: 2fr 1fr;
-  gap: 36px;
-  align-items: center;
-}
-
-/* Text takes the full width when an item has no image. */
-.modal-head.is-textonly { grid-template-columns: 1fr; }
-
-.modal-divider {
-  height: 0;
-  margin: 32px 0;
-  border: 0;
-  border-top: 1px solid var(--line);
-}
-
-.modal-close {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  width: 40px;
-  height: 40px;
-  background: none;
-  border: 1px solid var(--line);
-  border-radius: 50%;
-  color: var(--fg);
-  font: inherit;
-  font-size: 1.2rem;
-  line-height: 1;
-  cursor: pointer;
-}
-
-.modal-close:hover {
-  background: var(--fg);
-  color: var(--bg);
-}
-
-.modal-image img {
-  display: block;
-  width: 100%;
-  height: auto;
-  border: 1px solid var(--line);
-  border-radius: var(--thumb-img-radius);
-}
-
-.modal-title {
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: clamp(1.5rem, 3vw, 2.2rem);
-  font-weight: 700;
-  line-height: 1.1;
-  letter-spacing: -.02em;
-}
-
-.modal-subtitle {
-  margin: 6px 0 0;
-  color: var(--muted);
-  font-size: 1rem;
-}
-
-/* Capped independently of the panel — at 1200px wide, full-width
-   paragraphs would run past the point where the eye can find the
-   next line. */
-.modal-body {
-  max-width: 70ch;
-  font-family: var(--font-text);
-  font-size: 1rem;
-  line-height: 1.65;
-}
-
-.modal-body p { margin: 0 0 1em; }
-.modal-body p:last-child { margin-bottom: 0; }
-
 /* ---- responsive ---- */
 
-@media (max-width: 1000px) {
-  .grid { grid-template-columns: repeat(3, 1fr); }
+@media (max-width: 900px) {
+  .offer-grid { grid-template-columns: 1fr; gap: 28px; }
+
+  /* Sticky is pointless once the card is stacked under the steps —
+     it would pin itself to the bottom of its own section. */
+  .offer-card { position: static; }
 }
 
 @media (max-width: 760px) {
-  /* The wordmark is 8:1, so at phone widths it reads as a thin strip
-     unless it runs nearly edge to edge. Uncapped here on purpose. */
-  .logo img { width: 96vw; max-width: none; }
+  :root { --control-height: 46px; --gutter: 18px; }
 
-  /* Left, not centred — the hero below it is left-aligned, and a
-     centred logo over a left-aligned headline reads as a mistake. */
-  .site-header { justify-content: flex-start; padding-top: 18px; }
-  :root { --control-height: 46px; }
-  .hero { padding: 44px var(--gutter) 56px; }
-}
+  .site-header { padding-block: 16px; }
 
-@media (max-width: 720px) {
-  .grid { grid-template-columns: repeat(2, 1fr); gap: 16px; }
-  .modal-panel { padding: 56px 20px 28px; }
-  .modal-head { grid-template-columns: 1fr; gap: 24px; }
-  .modal-divider { margin: 24px 0; }
-}
+  /* The nav links fall away before the button does — the Strategy
+     Call is the one thing that has to survive to the smallest
+     screen. */
+  .nav-link { display: none; }
 
-@media (max-width: 420px) {
-  .grid { grid-template-columns: 1fr; }
+  .stages,
+  .maps { grid-template-columns: 1fr; }
+
+  .stage,
+  .map,
+  .method,
+  .offer-card { padding: 22px; }
+
+  .cta-row .btn { flex: 1 1 100%; }
 }
 
 @media (prefers-reduced-motion: reduce) {
