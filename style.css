@@ -85,7 +85,7 @@ a { color: inherit; }
 .hero,
 .band,
 .closing,
-.site-footer,
+.footer-inner,
 .header-inner {
   width: 100%;
   max-width: var(--maxw);
@@ -190,6 +190,17 @@ a { color: inherit; }
   color: var(--ink);
 }
 
+.btn-ink {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+  box-shadow: 2px 2px 0 var(--paper);
+}
+
+.btn-ink:hover,
+.btn-ink:focus-visible { box-shadow: 1px 1px 0 var(--paper); }
+.btn-ink:active { box-shadow: 0 0 0 var(--paper); }
+
 .btn-lg { height: 60px; padding: 0 30px; font-size: 1.08rem; }
 .btn-block { display: flex; width: 100%; }
 
@@ -199,6 +210,58 @@ a { color: inherit; }
   gap: 18px;
   margin-top: 40px;
 }
+
+/* ---- hero offer box ----
+   The hero used to end in two buttons of equal weight. This is the one
+   thing on sale, stated once, the full width of every other section. The
+   button goes ink-on-amber: a filled hot button would vanish into the box. */
+
+.hero-offer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(20px, 3vw, 40px);
+  margin-top: 44px;
+  padding: clamp(26px, 3.4vw, 40px);
+  background: var(--hot);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
+}
+
+.hero-offer-text { max-width: 46ch; }
+
+.hero-offer-title {
+  margin: 0 0 4px;
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 2.6vw, 2rem);
+  font-weight: 400;
+  line-height: 1.05;
+  letter-spacing: -.02em;
+  text-transform: uppercase;
+}
+
+/* The name is the headline; this line says what you actually get,
+   so the paragraph underneath doesn't have to open by explaining it. */
+.hero-offer-kicker {
+  margin: 0 0 12px;
+  font-weight: 700;
+  font-size: .95rem;
+  letter-spacing: .01em;
+  text-transform: uppercase;
+  color: var(--ink);
+  opacity: .72;
+}
+
+.hero-offer-p {
+  margin: 0;
+  font-size: 1.02rem;
+  line-height: 1.5;
+  color: var(--ink);
+}
+
+.hero-offer .btn { flex: 0 0 auto; }
 
 /* ---- hero ---- */
 
@@ -312,6 +375,15 @@ a { color: inherit; }
   line-height: .95;
   letter-spacing: -.03em;
   text-transform: uppercase;
+}
+
+.band-kicker {
+  margin: 14px 0 0;
+  font-weight: 700;
+  font-size: 1rem;
+  letter-spacing: .01em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
 }
 
 .price-line {
@@ -685,11 +757,15 @@ a { color: inherit; }
 
 /* ---- footer ---- */
 
+/* Full bleed, so the rule that closes the page runs the whole width of
+   the screen the way the header's does. The measure moves to
+   .footer-inner; the footer itself only carries the line. */
 .site-footer {
-  padding-block: 36px 52px;
   border-top: 2px solid var(--ink);
   font-size: .94rem;
 }
+
+.footer-inner { padding-block: 36px 52px; }
 
 .site-footer p { max-width: var(--measure); color: var(--ink-soft); }
 
@@ -731,10 +807,28 @@ a { color: inherit; }
 
   /* Side by side there is no room for both, so the button drops
      under the question and takes the full measure. */
+  .hero-offer { display: block; }
+  .hero-offer-text { max-width: none; margin-bottom: 22px; }
+  .hero-offer .btn { display: flex; width: 100%; }
+
   .pace-cta { display: block; }
   .pace-cta-text { max-width: none; margin-bottom: 22px; }
   .pace-cta .btn { display: flex; width: 100%; }
-  .offer-cta .btn { display: flex; width: 100%; }
+  /* The longest label on the page. At 375 it misses one line by a
+     few pixels at btn-lg's size, so it steps down to the base size
+     and gives back some side padding, which carries it. Wrapping is
+     still allowed underneath: below ~340 the line genuinely can't
+     fit, and .btn is nowrap, so it would spill past its own border. */
+  .offer-cta .btn {
+    display: flex;
+    width: 100%;
+    height: auto;
+    min-height: var(--control-height);
+    padding: 15px 16px;
+    font-size: 1rem;
+    white-space: normal;
+    line-height: 1.25;
+  }
 
   .method { padding: 22px; }
 }
