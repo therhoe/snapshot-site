@@ -10,19 +10,47 @@
    ============================================================ */
 
 :root {
-  --paper: #f4f0e6;           /* warm stock, not white */
+  --paper: #ffffff;
   --ink: #16150f;
   --ink-soft: #55524a;
 
-  --hot: #ff3b1f;             /* the shout */
+  /* Darkened from #ff3b1f so white text clears AA on it: 4.97:1
+     against 3.56:1 before. It also lifts "PACE." in the headline,
+     which was only passing on the relaxed display-text bar. */
+  --hot: #fcc42a;             /* the shout: a FILL, never text on white */
+
+  /* Amber is a light colour, so unlike the orange it replaced it can
+     only ever be a fill on this page. The two places the accent is
+     text on white take the deep variant instead — amber itself is
+     1.6:1 there, which is no text at all. */
+  --hot-deep: #8a6000;
+  --hot-bright: #fcc42a;
   --cool: #2b3ff3;            /* the counterweight */
 
   --line: #16150f;
-  --shadow: 6px 6px 0 var(--ink);
-  --shadow-hot: 6px 6px 0 var(--hot);
+  --shadow: 2px 2px 0 var(--ink);
 
   --control-height: 52px;
   --gutter: 24px;
+
+  /* Every button and box takes the same corner. Small enough that the
+     hard-edged look survives; the offset shadows follow it on their
+     own, so nothing else has to change. */
+  --radius: 4px;
+
+  /* The four step markers. One hue each so the sequence is readable
+     at a glance, not just by the numeral. */
+  --num-1: #e8362a;
+  --num-2: #2b5cf0;
+  --num-3: #ffc42a;
+  --num-4: #17a75a;
+
+  /* How far the right-hand column of the app cards drops, and how far
+     the connector between cards reaches into the column gap. The reach
+     matches the arrow's own width, so each arrow lands squarely in the
+     gap instead of over a card. */
+  --stagger: clamp(60px, 7.2vw, 100px);
+  --arrow-reach: clamp(50px, 6vw, 84px);
   --maxw: 1200px;
   --measure: 60ch;
 
@@ -65,7 +93,8 @@ a { color: inherit; }
   gap: 8px;
   padding: 8px 10px;
   background: var(--paper);
-  border: 2px solid var(--ink);
+  border: 1px solid var(--ink);
+  border-radius: var(--radius);
   box-shadow: 4px 4px 0 var(--ink);
   font-size: .7rem;
   font-weight: 700;
@@ -75,13 +104,14 @@ a { color: inherit; }
 
 .switch a {
   padding: 2px 7px;
-  border: 2px solid var(--ink);
+  border: 1px solid var(--ink);
+  border-radius: var(--radius);
   text-decoration: none;
 }
 
 .switch a[aria-current="page"] {
   background: var(--hot);
-  color: var(--paper);
+  color: var(--ink);
 }
 
 /* ---- shared layout ---- */
@@ -97,14 +127,6 @@ a { color: inherit; }
   padding-inline: var(--gutter);
 }
 
-.kicker {
-  margin: 0 0 18px;
-  font-family: var(--font-display);
-  font-size: .78rem;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-}
-
 /* ---- header ----
    Same stock as the page. The rule underneath is doing real work
    now: with the background matching the body there is nothing else
@@ -112,7 +134,7 @@ a { color: inherit; }
 
 .site-header {
   background: var(--paper);
-  border-bottom: 3px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
 }
 
 .header-inner {
@@ -157,7 +179,7 @@ a { color: inherit; }
 .nav-link:hover,
 .nav-link:focus-visible { color: var(--cool); }
 
-.site-header .btn-primary { height: 42px; box-shadow: 3px 3px 0 var(--ink); }
+.site-header .btn-primary { height: 42px; box-shadow: var(--shadow); }
 
 /* ---- buttons ----
    Filled hot is reserved for the Strategy Call, the page's one
@@ -170,7 +192,8 @@ a { color: inherit; }
   height: var(--control-height);
   padding: 0 24px;
   background: var(--paper);
-  border: 3px solid var(--ink);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
   color: var(--ink);
   font-family: var(--font-text);
   font-weight: 700;
@@ -187,31 +210,19 @@ a { color: inherit; }
 /* Press: the button moves onto its own shadow. */
 .btn:hover,
 .btn:focus-visible {
-  transform: translate(3px, 3px);
-  box-shadow: 3px 3px 0 var(--ink);
+  transform: translate(1px, 1px);
+  box-shadow: 1px 1px 0 var(--ink);
 }
 
 .btn:active {
-  transform: translate(6px, 6px);
+  transform: translate(2px, 2px);
   box-shadow: 0 0 0 var(--ink);
 }
 
 .btn-primary {
   background: var(--hot);
-  color: var(--paper);
+  color: var(--ink);
 }
-
-/* On the black band a black border and black shadow would disappear,
-   so ghost buttons there borrow the paper colour instead. */
-.btn-on-dark {
-  background: transparent;
-  border-color: var(--paper);
-  color: var(--paper);
-  box-shadow: 6px 6px 0 var(--hot);
-}
-
-.btn-on-dark:hover,
-.btn-on-dark:focus-visible { box-shadow: 3px 3px 0 var(--hot); }
 
 .btn-lg { height: 60px; padding: 0 30px; font-size: 1.08rem; }
 .btn-block { display: flex; width: 100%; }
@@ -239,11 +250,28 @@ a { color: inherit; }
 
 .hero-title .line { display: block; }
 
-/* The one word the whole page turns on. */
+/* The one word the whole page turns on. Drawn as an outline, the
+   same move the giant P/A/C/E letters make further down, so the two
+   read as one idea.
+
+   The colour below is the fallback: if text-stroke is missing the
+   word stays solid and legible rather than disappearing, which is
+   what a bare `color: transparent` would do. */
 .hero-title em {
   position: relative;
   font-style: normal;
-  color: var(--hot);
+  color: var(--hot-deep);
+}
+
+@supports (-webkit-text-stroke: 1px black) {
+  .hero-title em {
+    color: transparent;
+    /* Stroke in em so it tracks the headline's own fluid size, with
+       a floor and a ceiling: 3px over a 30px phone headline is a
+       blob, and a hairline over a 90px one is not an outline. */
+    -webkit-text-stroke: clamp(1.5px, .028em, 3px) var(--ink);
+    text-stroke: clamp(1.5px, .028em, 3px) var(--ink);
+  }
 }
 
 .hero-title em::after {
@@ -263,8 +291,9 @@ a { color: inherit; }
   line-height: 1.55;
 }
 
-/* The highlighter, in the blue that already underlines the headline
-   rather than a green that belongs to nothing else on the page. */
+/* The highlighter, in the blue that already underlines the headline.
+   Unused at the moment — the hero paragraph marks no words — but it is
+   what a <strong> in that paragraph will get. */
 .hero-sub strong {
   background: var(--cool);
   color: var(--paper);
@@ -277,22 +306,6 @@ a { color: inherit; }
 /* ---- bands ---- */
 
 .band { padding-block: clamp(60px, 8vw, 104px); }
-
-.band-dark {
-  max-width: none;
-  padding-inline: 0;
-  background: var(--ink);
-  color: var(--paper);
-}
-
-/* The dark band bleeds full width, so its contents need the measure
-   put back on them. */
-.band-dark .band-inner {
-  width: 100%;
-  max-width: var(--maxw);
-  margin-inline: auto;
-  padding-inline: var(--gutter);
-}
 
 .band-head { margin-bottom: clamp(40px, 5vw, 64px); }
 
@@ -311,19 +324,12 @@ a { color: inherit; }
   text-transform: uppercase;
 }
 
-.lead-sub {
-  max-width: var(--measure);
-  margin: 26px 0 0;
-  color: var(--ink-soft);
-  font-size: 1.05rem;
-}
-
 /* The framework's own title, now a step below the statement above
    it — separated by a rule so PACE still arrives as its own thing. */
 .pace-head {
   margin-bottom: clamp(36px, 4.5vw, 56px);
   padding-top: clamp(34px, 4.5vw, 56px);
-  border-top: 3px solid var(--ink);
+  border-top: 2px solid var(--ink);
 }
 
 /* Smaller than the statement that introduces it. PACE is the answer
@@ -348,8 +354,6 @@ a { color: inherit; }
   font-size: 1.05rem;
 }
 
-.band-dark .band-sub { color: #cfccc2; }
-
 /* ---- PACE stages ----
    Full-width slabs with an enormous letter down the left. The letter
    is the spine of the section; the copy sits beside it. */
@@ -358,7 +362,7 @@ a { color: inherit; }
   margin: 0;
   padding: 0;
   list-style: none;
-  border-top: 3px solid var(--ink);
+  border-top: 2px solid var(--ink);
 }
 
 .stage {
@@ -367,7 +371,7 @@ a { color: inherit; }
   gap: clamp(20px, 4vw, 52px);
   align-items: start;
   padding-block: clamp(32px, 4vw, 52px);
-  border-bottom: 3px solid var(--ink);
+  border-bottom: 2px solid var(--ink);
 }
 
 .stage-mark {
@@ -423,49 +427,89 @@ a { color: inherit; }
 .chips li {
   padding: 5px 12px;
   background: var(--paper);
-  border: 2px solid var(--ink);
+  border: 1px solid var(--ink);
+  border-radius: var(--radius);
   font-size: .88rem;
   font-weight: 500;
 }
 
-/* ---- PACE mapped onto the app ---- */
+/* ---- the hand-off out of PACE ----
+   The last stage closes on a 3px rule, so this block needs no top
+   border of its own; it reads as the row after the four slabs. */
+
+.pace-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: clamp(20px, 3vw, 40px);
+  padding-block: clamp(32px, 4vw, 52px);
+}
+
+.pace-cta-text {
+  max-width: 24ch;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.25rem, 2.4vw, 1.75rem);
+  font-weight: 400;
+  line-height: 1.12;
+  letter-spacing: -.02em;
+}
+
+/* The button must not be squeezed by the headline beside it. */
+.pace-cta .btn { flex: 0 0 auto; }
+
+/* ---- the four questions ----
+   Two columns, but the right one is dropped half a card so the four
+   read as one path rather than a 2x2 block. Cards sit at their own
+   height (align-items: start) -- stretching them to match would flatten
+   the stagger back into rows. */
 
 .maps {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 22px;
+  align-items: start;
+  /* Wide enough a column gap for the connectors to live in it. */
+  column-gap: clamp(56px, 7vw, 96px);
+  row-gap: 22px;
   margin: 0;
   padding: 0;
   list-style: none;
 }
 
+/* The drop. Applied to the right column only; the left column keeps
+   the top line, so each pair reads high-then-low. */
+.maps .map:nth-child(even) { margin-top: var(--stagger); }
+
 .map {
+  position: relative;
   padding: 26px;
-  background: #1f1e17;
-  border: 3px solid var(--paper);
-  box-shadow: 6px 6px 0 var(--paper);
+  background: var(--paper);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  box-shadow: var(--shadow);
 }
 
-.map-stage {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+.map-num {
   margin: 0 0 14px;
-  font-family: var(--font-display);
-  font-size: .78rem;
-  letter-spacing: .14em;
-  text-transform: uppercase;
 }
 
-.map-stage span {
+.map-num span {
   display: grid;
   place-items: center;
-  width: 28px;
-  height: 28px;
-  background: var(--paper);
-  color: var(--ink);
-  font-size: .9rem;
+  width: 38px;
+  height: 38px;
+  border-radius: var(--radius);
+  color: var(--paper);
+  font-family: var(--font-display);
+  font-size: .95rem;
+  letter-spacing: -.02em;
 }
+
+.map:nth-child(1) .map-num span { background: var(--num-1); }
+.map:nth-child(2) .map-num span { background: var(--num-2); }
+.map:nth-child(3) .map-num span { background: var(--num-3); }
+.map:nth-child(4) .map-num span { background: var(--num-4); }
 
 .map-what {
   margin: 0 0 10px;
@@ -476,8 +520,40 @@ a { color: inherit; }
 
 .map-body {
   margin: 0;
-  color: #cfccc2;
+  color: var(--ink-soft);
   font-size: .98rem;
+}
+
+/* ---- the connectors ----
+   Each arrow hangs off the card it leaves from and reaches into the
+   column gap, so it stays put whatever the cards do to each other's
+   heights. The artwork is one curve pointing down-right; the
+   right-to-left hop is the same curve flipped. */
+
+/* The two directions start at different heights on their card: left
+   to right leaves near the top, so the head lands just inside the
+   card below-right; right to left leaves lower down, which also keeps
+   the two curves in the gutter from crossing each other. */
+.map-arrow {
+  position: absolute;
+  width: clamp(50px, 6vw, 84px);
+  color: var(--hot-deep);
+  pointer-events: none;
+}
+
+.map-arrow svg { display: block; width: 100%; height: auto; }
+
+/* 1 -> 2 and 3 -> 4: out of the right edge, into the gap. */
+.map-arrow-right {
+  top: 24px;
+  right: calc(var(--arrow-reach) * -1);
+}
+
+/* 2 -> 3: back across to the left column, one row down. */
+.map-arrow-left {
+  top: 52%;
+  left: calc(var(--arrow-reach) * -1);
+  transform: scaleX(-1);
 }
 
 /* ---- the snapshot method ---- */
@@ -487,8 +563,9 @@ a { color: inherit; }
   padding: 30px;
   background: var(--paper);
   color: var(--ink);
-  border: 3px solid var(--paper);
-  box-shadow: var(--shadow-hot);
+  border: 2px solid var(--ink);
+  border-radius: var(--radius);
+  box-shadow: 2px 2px 0 var(--hot);
 }
 
 .method-title {
@@ -517,11 +594,12 @@ a { color: inherit; }
   padding: 6px 13px;
   background: var(--ink);
   color: var(--paper);
+  border-radius: var(--radius);
   font-size: .86rem;
   font-weight: 500;
 }
 
-.flow li::before { content: counter(flow) ". "; color: var(--hot); }
+.flow li::before { content: counter(flow) ". "; color: var(--hot-bright); }
 
 .pricing {
   display: flex;
@@ -531,8 +609,14 @@ a { color: inherit; }
   margin-top: 36px;
 }
 
-.pricing-line { margin: 0; color: #cfccc2; font-size: 1.05rem; }
-.pricing-line strong { color: var(--hot); }
+.pricing-line {
+  flex: 1 1 var(--measure);
+  max-width: var(--measure);
+  margin: 0;
+  color: var(--ink-soft);
+  font-size: 1.05rem;
+}
+.pricing-line strong { color: var(--ink); }
 
 /* ---- the offer ---- */
 
@@ -571,6 +655,7 @@ a { color: inherit; }
   width: 36px;
   height: 36px;
   background: var(--cool);
+  border-radius: var(--radius);
   color: var(--paper);
   font-family: var(--font-display);
   font-size: 1rem;
@@ -592,11 +677,14 @@ a { color: inherit; }
 
 /* ---- closing ---- */
 
+/* The page ends on the accent rather than on the ink: an amber slab
+   with black type, and the two buttons reduced to black and white so
+   nothing competes with the field they sit on. */
 .closing {
   max-width: none;
   padding-block: clamp(70px, 9vw, 120px);
-  background: var(--ink);
-  color: var(--paper);
+  background: var(--hot);
+  color: var(--ink);
   text-align: center;
 }
 
@@ -613,11 +701,19 @@ a { color: inherit; }
 
 .closing .cta-row { justify-content: center; }
 
+/* The primary button is amber everywhere else, which would vanish
+   here. It goes black; the secondary keeps the default white. */
+.closing .btn-primary {
+  background: var(--ink);
+  border-color: var(--ink);
+  color: var(--paper);
+}
+
 /* ---- footer ---- */
 
 .site-footer {
   padding-block: 36px 52px;
-  border-top: 3px solid var(--ink);
+  border-top: 2px solid var(--ink);
   font-size: .94rem;
 }
 
@@ -632,12 +728,17 @@ a { color: inherit; }
 
 .footer-links a { font-weight: 500; text-decoration: none; }
 .footer-links a:hover,
-.footer-links a:focus-visible { color: var(--hot); }
+.footer-links a:focus-visible { color: var(--hot-deep); }
 
 /* ---- responsive ---- */
 
 @media (max-width: 960px) {
+  /* One column: there is no second column to stagger against and no
+     gap for a connector to sit in, so both come off and the numbers
+     carry the sequence on their own. */
   .maps { grid-template-columns: 1fr; }
+  .maps .map:nth-child(even) { margin-top: 0; }
+  .map-arrow { display: none; }
 }
 
 @media (max-width: 720px) {
@@ -652,6 +753,13 @@ a { color: inherit; }
 
   .cta-row { gap: 14px; }
   .cta-row .btn { flex: 1 1 100%; }
+  .pricing .btn { display: flex; width: 100%; }
+
+  /* Side by side there is no room for both, so the button drops
+     under the question and takes the full measure. */
+  .pace-cta { display: block; }
+  .pace-cta-text { max-width: none; margin-bottom: 22px; }
+  .pace-cta .btn { display: flex; width: 100%; }
 
   .method { padding: 22px; }
   .switch { right: 8px; bottom: 8px; }
