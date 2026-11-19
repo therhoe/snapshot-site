@@ -96,21 +96,6 @@ a { color: inherit; }
   color: var(--accent-ink);
 }
 
-/* ---- placeholders ----
-   Unconfirmed Strategy Call details. Deliberately loud: these must
-   not ship unnoticed, so they're outlined in amber rather than
-   styled to blend in. Delete the class with the guesswork. */
-
-.tbd {
-  display: inline-block;
-  padding: 1px 8px;
-  border: 1px dashed #ffc42a;
-  border-radius: 6px;
-  color: #ffc42a;
-  font-size: .92em;
-  font-style: normal;
-}
-
 /* ---- shared layout ---- */
 
 .site-header,
@@ -134,15 +119,6 @@ a { color: inherit; }
   margin: 0 auto;
   border: 0;
   border-top: 1px solid var(--line);
-}
-
-.eyebrow {
-  margin: 0 0 14px;
-  color: var(--accent);
-  font-size: .82rem;
-  font-weight: 500;
-  letter-spacing: .14em;
-  text-transform: uppercase;
 }
 
 /* ---- header ---- */
@@ -261,12 +237,6 @@ a { color: inherit; }
   margin-top: 36px;
 }
 
-.cta-note {
-  margin: 20px 0 0;
-  color: var(--muted);
-  font-size: .92rem;
-}
-
 /* ---- hero ---- */
 
 .hero { padding-block: clamp(56px, 9vw, 104px) clamp(56px, 8vw, 92px); }
@@ -316,6 +286,18 @@ a { color: inherit; }
   margin: 18px 0 0;
   color: var(--muted-bright);
   font-size: clamp(1rem, 1.4vw, 1.1rem);
+}
+
+/* The section opens with a statement rather than a small label, and
+   it has to outrank the section title underneath it. */
+.lead-title {
+  max-width: 22ch;
+  margin: 0 0 clamp(36px, 5vw, 56px);
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3.4vw, 2.8rem);
+  font-weight: 700;
+  line-height: 1.12;
+  letter-spacing: -.02em;
 }
 
 /* ---- PACE stages ---- */
@@ -380,7 +362,32 @@ a { color: inherit; }
 .stage-list li + li { margin-top: 6px; }
 .stage-list span { color: var(--fg); }
 
-/* ---- PACE mapped onto the app ---- */
+/* ---- the hand-off out of PACE ---- */
+
+.pace-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+  margin-top: clamp(32px, 4vw, 48px);
+  padding-top: clamp(28px, 4vw, 40px);
+  border-top: 1px solid var(--line);
+}
+
+.pace-cta-text {
+  max-width: 28ch;
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(1.15rem, 2vw, 1.5rem);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -.01em;
+}
+
+.pace-cta .btn { flex: 0 0 auto; }
+
+/* ---- the four questions ---- */
 
 .maps {
   display: grid;
@@ -397,27 +404,18 @@ a { color: inherit; }
   border-radius: var(--radius);
 }
 
-.map-stage {
-  margin: 0 0 10px;
-  color: var(--muted);
-  font-size: .82rem;
-  font-weight: 500;
-  letter-spacing: .12em;
-  text-transform: uppercase;
-}
+.map-num { margin: 0 0 14px; }
 
-.map-stage span {
+.map-num span {
   display: inline-grid;
   place-items: center;
-  width: 24px;
-  height: 24px;
-  margin-right: 8px;
+  width: 32px;
+  height: 32px;
   background: var(--accent);
   border-radius: 50%;
   color: var(--accent-ink);
   font-size: .86rem;
   font-weight: 700;
-  vertical-align: -6px;
 }
 
 .map-what {
@@ -474,13 +472,6 @@ a { color: inherit; }
 
 /* ---- the offer ---- */
 
-.offer-grid {
-  display: grid;
-  grid-template-columns: minmax(0, 1.5fr) minmax(0, 1fr);
-  gap: 36px;
-  align-items: start;
-}
-
 .offer-h {
   margin: 0 0 14px;
   font-family: var(--font-display);
@@ -527,48 +518,14 @@ a { color: inherit; }
   font-weight: 500;
 }
 
-/* Sticks while the steps beside it scroll, so the price and the
-   button stay in reach through the whole section. */
-.offer-card {
-  position: sticky;
-  top: 24px;
-  padding: 28px;
-  background: var(--bg-raised);
-  border: 1px solid var(--line);
-  border-radius: var(--radius);
-}
-
-.offer-facts {
-  margin: 0 0 24px;
-  padding: 0;
-}
-
-.offer-facts > div {
-  padding: 14px 0;
-  border-bottom: 1px solid var(--line);
-}
-
-.offer-facts > div:first-child { padding-top: 0; }
-
-.offer-facts dt {
-  margin-bottom: 6px;
-  color: var(--muted);
-  font-size: .8rem;
-  font-weight: 500;
-  letter-spacing: .1em;
-  text-transform: uppercase;
-}
-
-.offer-facts dd {
-  margin: 0;
-  font-size: 1rem;
-}
-
-.offer-note {
-  margin: 14px 0 0;
-  color: var(--muted);
-  font-size: .88rem;
-  text-align: center;
+/* The offer's call to action, now that it is no longer parked in a
+   sticky card beside the steps. */
+.offer-cta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 16px;
+  margin-top: 32px;
 }
 
 /* ---- closing ---- */
@@ -619,14 +576,6 @@ a { color: inherit; }
 
 /* ---- responsive ---- */
 
-@media (max-width: 900px) {
-  .offer-grid { grid-template-columns: 1fr; gap: 28px; }
-
-  /* Sticky is pointless once the card is stacked under the steps —
-     it would pin itself to the bottom of its own section. */
-  .offer-card { position: static; }
-}
-
 @media (max-width: 760px) {
   :root { --control-height: 46px; --gutter: 18px; }
 
@@ -642,8 +591,12 @@ a { color: inherit; }
 
   .stage,
   .map,
-  .method,
-  .offer-card { padding: 22px; }
+  .method { padding: 22px; }
+
+  /* Side by side there is no room for both. */
+  .pace-cta { display: block; }
+  .pace-cta-text { max-width: none; margin-bottom: 18px; }
+  .pace-cta .btn { display: flex; width: 100%; }
 
   .cta-row .btn { flex: 1 1 100%; }
 }
