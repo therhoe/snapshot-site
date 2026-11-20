@@ -57,10 +57,11 @@
              Roboto, Helvetica, Arial, sans-serif;
 
   /* The one step added above Substack's scale, whose homepage stops at
-     30px. Trimmed to 40px: the card now starts halfway down the shot,
-     so every pixel of card height pushes the hero taller. At 40px the
-     headline still lands in two or three lines. */
-  --size-hero: clamp(1.75rem, 3vw, 2.5rem);
+     30px. 64px, which a longer headline could not have carried: the
+     card starts halfway down the screenshot, so every line of headline
+     pushes the whole hero taller. At six words it lands in two lines
+     and costs less height than the old headline did at 40px. */
+  --size-hero: clamp(2.5rem, 4.8vw, 4rem);
   --size-feature: 1.875rem;    /* 30px — Substack's top size */
   /* 18px, not the newsletter's 20px. Same optical size: Spectral has
      a small x-height and Inter a tall one, so 18 of Inter sits where
