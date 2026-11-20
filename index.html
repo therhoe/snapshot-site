@@ -3,364 +3,326 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Snapshot CRO — Everybody shops at their own pace</title>
-<meta name="description" content="PACE is how we find where real shoppers stall. Snapshot is how we measure it. Set Your PACE on a 1:1 session, or install the Shopify app free.">
+<title>Snapshot CRO — Know What to Test on Your Shopify Store</title>
+<meta name="description" content="Snapshot CRO tracks how real shoppers behave on your Shopify store, so you know which pages to fix and what to test first. Free to install.">
+
+<!-- Social cards. og:image must be an absolute URL, and this one assumes
+     the page is served from snapshot.therealheroesofecommerce.com — if
+     it ends up anywhere else, these two URLs move with it. -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://snapshot.therealheroesofecommerce.com/">
+<meta property="og:title" content="Snapshot CRO — Know What to Test on Your Shopify Store">
+<meta property="og:description" content="Snapshot CRO tracks how real shoppers behave on your Shopify store, so you know which pages to fix and what to test first. Free to install.">
+<meta property="og:image" content="https://snapshot.therealheroesofecommerce.com/assets/img/snapshot-dashboard.png">
+<meta property="og:image:alt" content="The Snapshot dashboard inside Shopify admin.">
+<meta name="twitter:card" content="summary_large_image">
+
 
 <link rel="icon" href="assets/img/logo.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="style.css">
+<!-- Inter for body copy. Headings stay on the system stack. -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
 
-<!-- REVIEW AID — delete this link and the .switch block below before launch. -->
-<link rel="stylesheet" href="review-switch.css">
+<!-- Built on the Substack theme from heroesofecommerce.substack.com,
+     so the landing page and the newsletter read as one property. The
+     earlier designs are archived at /poster/ and /v1/, and an
+     alternate copy draft at /v2/. None is linked from here. -->
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <!-- REVIEW AID — delete before launch, along with the stylesheet link
-       above and review-switch.css itself. 02 is the restructured copy. -->
-  <nav class="switch" aria-label="Copy versions">
-    <span>copy</span>
-    <a href="./" aria-current="page">01</a>
-    <a href="v2/">02</a>
-  </nav>
-
-<!-- ====================================================================
-     Poster typography on paper stock: Archivo Black for display, hard
-     offset shadows, giant PACE letters as a spine.
-
-     The earlier dark-stock design is kept at /v1/ for reference. It is
-     not linked from anywhere and is not indexed.
-     ==================================================================== -->
-
   <header class="site-header">
-    <div class="header-inner">
-      <a class="brand" href="./" aria-label="Snapshot CRO home">
-        <img src="assets/img/logo-black.png" alt="Snapshot CRO" width="920" height="270">
-      </a>
-
+    <div class="wrap header-inner">
+      <a class="brand" href="./">Snapshot CRO</a>
       <nav class="site-nav" aria-label="Primary">
-        <a class="nav-link" href="#pace">Framework</a>
-        <a class="nav-link" href="#snapshot">App</a>
-        <a class="btn btn-primary" href="https://cal.com/jason-shepherd-fblx2v/snapshot-cro">Book 1:1 Session</a>
+        <a class="nav-link" href="#rules">Rules of thumb</a>
+        <a class="nav-link" href="#start">Get started</a>
+        <a class="nav-link" href="#call">Strategy call</a>
+        <a class="btn btn-primary" href="https://apps.shopify.com/snapshot-cro">Download App &mdash; Free</a>
       </nav>
     </div>
   </header>
 
-  <main>
+  <main class="wrap">
 
-    <!-- ---- hero ---- -->
-    <section class="hero">
-      <h1 class="hero-title">
-        <span class="line">Everybody</span>
-        <span class="line">shops at their</span>
-        <span class="line">own <em>pace.</em></span>
-      </h1>
-
-      <p class="hero-sub">
-        Turn more visitors into customers by seeing how they interact with your
-        site and creating pages based on their behavior. Our framework and
-        analytics tool give you the clearest view of how to get your site from
-        A to B.
-      </p>
-
-      <div class="hero-offer">
-        <div class="hero-offer-text">
-          <h2 class="hero-offer-title">Set Your PACE</h2>
-          <p class="hero-offer-kicker">1:1 session to jumpstart CRO</p>
-          <p class="hero-offer-p">
-            Sixty minutes on your store, one call. We run PACE over your pages,
-            show you where real shoppers stall, and leave you with the fixes
-            worth doing first. $90.
+    <!-- 1 ---- the pitch ---- -->
+    <section id="pitch">
+      <!-- Copy left, product right. The shot is the wider column: it is
+           a 16:9 screenshot with real numbers in it, and squeezing it to
+           match the text column would make them unreadable. -->
+      <div class="hero-grid">
+        <div class="hero-copy">
+          <h1>How to build a CRO program that makes sense&hellip; dollars and sense.</h1>
+          <p class="lead">
+            Conversion optimization starts by tracking user behavior.
+            That&rsquo;s where you find the key to unlocking more sales from
+            your existing traffic. Snapshot CRO is an analytics app built for
+            Shopify stores who are ready to start AB testing but don&rsquo;t
+            know what to test.
           </p>
+          <div class="btn-row">
+            <a class="btn btn-primary btn-lg" href="https://apps.shopify.com/snapshot-cro">Download App &mdash; Free</a>
+            <a class="btn btn-secondary btn-lg" href="#call">Book 1:1 CRO Session</a>
+          </div>
         </div>
-        <a class="btn btn-ink btn-lg" href="https://cal.com/jason-shepherd-fblx2v/snapshot-cro">Book Your Session &mdash; $90</a>
+
+        <figure class="hero-shot">
+          <img src="assets/img/snapshot-dashboard.png"
+               alt="The Snapshot dashboard inside Shopify admin, showing traffic, conversion rate, average order value and customer lifetime value for the month to date, with a conversion rate trend line below."
+               width="1512" height="874" loading="eager" decoding="async">
+        </figure>
       </div>
     </section>
 
+    <!-- 2 ---- social proof ----
+         Quotes from clients. Cards for now; a carousel is a later
+         decision. Copy and names are lorem placeholder. -->
+    <section id="proof">
+      <h2>What clients say&hellip;</h2>
 
-    <!-- ---- the framework ---- -->
-    <section class="band" id="pace">
-      <header class="band-head">
-        <h2 class="lead-title">A new perspective on the customer journey</h2>
-      </header>
+      <div class="cols quotes">
+        <blockquote class="card">
+          <p class="card-body">
+            &ldquo;We were very excited and eager to see the results we could
+            achieve from CRO. But we were surprised at how much our sales
+            improved. Deeply appreciate the detail and help Shep brought to
+            this experience.&rdquo;
+          </p>
+          <div class="quote-by">
+            <p class="quote-name">Dr. Ray
+              <span class="quote-role">NWFA &middot; Portland, OR</span>
+            </p>
+          </div>
+        </blockquote>
 
-      <div class="pace-head">
-        <h3 class="band-title">The PACE Framework</h3>
-        <p class="band-sub">
-          This framework was developed after spending years in quantitative and
-          qualitative research of retail and DTC brands. It breaks down the
-          journey based on the psychology of the customer at each step in their
-          buying process, and it aligns with your marketing and website.
-        </p>
+        <blockquote class="card">
+          <p class="card-body">
+            &ldquo;Our site is the best it&rsquo;s ever been. Thanks for the
+            hard work!&rdquo;
+          </p>
+          <div class="quote-by">
+            <p class="quote-name">Leo
+              <span class="quote-role">AT Fitness &middot; Shanghai, CN</span>
+            </p>
+          </div>
+        </blockquote>
+
+      </div>
+    </section>
+
+    <!-- 3 ---- rules of thumb ---- -->
+    <section id="rules">
+      <h2>A few rules of thumb to get you started&hellip;</h2>
+
+      <div class="cols cols-2">
+        <div class="rule-col rule-col--dont">
+          <h3>Don&rsquo;t</h3>
+          <ul>
+            <li>
+              <p class="rule-name">Test a &ldquo;good idea&rdquo; randomly</p>
+              <p class="explain">
+                There is nothing wrong with testing a hunch, but it needs to be
+                part of a plan. A bunch of ad hoc tests pile up incoherently.
+              </p>
+            </li>
+            <li>
+              <p class="rule-name">Copy a competitor&rsquo;s site</p>
+              <p class="explain">
+                What works on a competitor&rsquo;s site may or may not work on
+                yours, and if it doesn&rsquo;t you might kill a good test
+                because it didn&rsquo;t match your audience in the same way.
+              </p>
+            </li>
+            <li>
+              <p class="rule-name">Ignore the obvious</p>
+              <p class="explain">
+                When you are getting feedback and know there is an issue, do
+                that now. That is not an optimization, it&rsquo;s a fix.
+              </p>
+            </li>
+          </ul>
+        </div>
+
+        <div class="rule-col rule-col--do">
+          <h3>Do</h3>
+          <ul>
+            <li>
+              <p class="rule-name">Set your PACE</p>
+              <p class="explain">
+                Understand the psychology of your customers at each stage of the
+                buying cycle. It reveals gaps and holes, and presents
+                opportunities quickly.
+              </p>
+            </li>
+            <li>
+              <p class="rule-name">Check CVR by Channel</p>
+              <p class="explain">
+                Different channels get different results because they get
+                different types of people. See what is working by channel
+                instead of looking for a one-size-fits-all approach.
+              </p>
+            </li>
+            <li>
+              <p class="rule-name">Track behavior on PDP</p>
+              <p class="explain">
+                If you don&rsquo;t know what customers are doing and clicking on
+                your site, you are missing the data you need for CRO. Gather it
+                first. A lot of it.
+              </p>
+            </li>
+          </ul>
+        </div>
       </div>
 
-      <ol class="stages">
-        <li class="stage">
-          <p class="stage-mark" aria-hidden="true">P</p>
-          <div class="stage-body-wrap">
-            <h4 class="stage-name">Prognosis</h4>
-            <p class="stage-line">Their guess at what fixes the problem.</p>
-            <p class="stage-body">
-              Nobody wants a product. They want progress, and they
-              &ldquo;hire&rdquo; something to make it &mdash; the Jobs To Be Done idea,
-              credit to Clayton Christensen. A shopper arrives with a theory about
-              what will work. Your page either confirms that theory or argues with it.
-            </p>
-            <ul class="chips">
-              <li>Problem &rarr; solve it</li>
-              <li>Pain point &rarr; relieve it</li>
-              <li>Promise &rarr; attract them</li>
-            </ul>
-          </div>
+      <p style="margin-top:28px">
+        Once you have this, conversion optimization starts to fall in place.
+      </p>
+    </section>
+
+    <!-- 4 ---- getting started ----
+         The three steps and the video are one section now. They were
+         two, each ending in its own download button, which asked for
+         the same click twice in a row. The steps carry no artwork so
+         the video is the only visual the section has. -->
+    <section id="start">
+      <h2>Get started with Snapshot</h2>
+
+      <div class="start-grid">
+      <ol class="steps">
+        <li>
+          <p class="step-num">Step 1 &middot; Site Snapshot</p>
+          <h3>Prioritize which page needs CRO</h3>
+          <p class="explain">
+            Not all pages are created equally, and a sitewide snapshot will show
+            you what each page is worth and which ones are worth your time.
+          </p>
         </li>
 
-        <li class="stage">
-          <p class="stage-mark" aria-hidden="true">A</p>
-          <div class="stage-body-wrap">
-            <h4 class="stage-name">Activity</h4>
-            <p class="stage-line">Where they go looking, and what they do there.</p>
-            <p class="stage-body">
-              Depending on what they&rsquo;re buying, they go hunting &mdash; or a
-              brand comes hunting for them. Social, search, ads, a friend&rsquo;s
-              recommendation, forums, articles, reviews. By the time they reach you,
-              that route has already shaped what they expect to find.
-            </p>
-            <ul class="chips">
-              <li>Where do they go?</li>
-              <li>What do they do there?</li>
-            </ul>
-          </div>
+        <li>
+          <p class="step-num">Step 2 &middot; Product Page Snapshot</p>
+          <h3>Track Engagement &amp; Behavior</h3>
+          <p class="explain">
+            There are dozens of elements on any given product page. Knowing
+            where customers are looking for answers and cues shows you exactly
+            what to do next.
+          </p>
         </li>
 
-        <li class="stage">
-          <p class="stage-mark" aria-hidden="true">C</p>
-          <div class="stage-body-wrap">
-            <h4 class="stage-name">Criteria</h4>
-            <p class="stage-line">How they judge whether it&rsquo;s right for them.</p>
-            <p class="stage-body">
-              Every shopper carries a private checklist. Some of it is what the
-              product must have; just as much of it is what would rule you out on
-              the spot. Most pages are written entirely for the first list and
-              completely ignore the second.
-            </p>
-            <ul class="chips">
-              <li>Specs &amp; features</li>
-              <li>Disqualifiers</li>
-            </ul>
-          </div>
-        </li>
-
-        <li class="stage">
-          <p class="stage-mark" aria-hidden="true">E</p>
-          <div class="stage-body-wrap">
-            <h4 class="stage-name">Event</h4>
-            <p class="stage-line">What finally pushes them to buy.</p>
-            <p class="stage-body">
-              Wanting it isn&rsquo;t buying it. Something has to tip the moment over
-              &mdash; a deadline, a nudge, a price, a competitor who got there first.
-              Plenty of stores lose people who had already decided, simply because
-              nothing turned the decision into an order.
-            </p>
-            <ul class="chips">
-              <li>Waiting on something?</li>
-              <li>Need a nudge?</li>
-              <li>Urgent, or forever?</li>
-              <li>Could a rival poach them?</li>
-            </ul>
-          </div>
+        <li>
+          <p class="step-num">Step 3</p>
+          <h3>Experiment &amp; Extrapolate</h3>
+          <p class="explain">
+            Test out your new hypotheses and implement the winners, and then
+            take the learnings and test them across other pages and other parts
+            of your marketing funnel.
+          </p>
         </li>
       </ol>
 
-      <!-- Hand-off out of the framework and into the offer. Sits on the
-           rule the last stage closes with, so it reads as the next beat
-           of the section rather than a floating box. -->
-      <div class="pace-cta">
-        <p class="pace-cta-text">
-          Want to explore how to use the PACE Framework for your website?
-        </p>
-        <a class="btn btn-primary btn-lg" href="https://cal.com/jason-shepherd-fblx2v/snapshot-cro">Set Your PACE</a>
+      <!-- Loom embed. The share id is the last path segment of the
+           loom.com/share/… link; /embed/ is the same id on the player
+           route. Lazy, because it sits below the fold on most screens. -->
+      <figure class="section-video">
+        <iframe src="https://www.loom.com/embed/8635dcac40f84cc8bc35df5056b1b7d1"
+                title="Snapshot CRO walkthrough"
+                loading="lazy"
+                allow="fullscreen"
+                allowfullscreen></iframe>
+      </figure>
+      </div>
+
+      <div class="btn-row">
+        <a class="btn btn-primary btn-lg" href="https://apps.shopify.com/snapshot-cro">Download App &mdash; Free</a>
       </div>
     </section>
 
-    <!-- ---- the app ---- -->
-    <section class="band" id="snapshot">
-      <header class="band-head">
-        <h2 class="band-title">Snapshot &mdash; Shopify Analytics App</h2>
-        <p class="band-sub">
-          There is nothing worse than too much data. In ecommerce, we drown
-          ourselves in data that is distracting and just creates noise. So
-          rather than capture every data point that the API can handle, we
-          hone in on the deeper behavioral data that gives you pointed
-          insights for conversion rate optimization.
-        </p>
-      </header>
-
-      <!-- Four questions a snapshot answers, read as a sequence.
-           The right column drops half a card on desktop so the eye
-           zigzags 1-2-3-4 rather than reading two tidy columns. -->
-      <ul class="maps">
-        <li class="map">
-          <p class="map-num"><span>01</span></p>
-          <h3 class="map-what">Which pages need CRO?</h3>
-          <p class="map-body">
-            A site snapshot will show you the CVR and revenue made from each page&rsquo;s visitors, so you can focus where it matters.
+    <!-- 6 ---- the offer ---- -->
+    <section id="call">
+      <div class="offer">
+        <div>
+          <h2>Let&rsquo;s use your store as an example</h2>
+          <p>
+            The best CRO advice and examples will give you a lot of info and
+            ideas, but a live walkthrough of your own website will give you 10
+            times that. CRO is very relative to your industry and subjective to
+            your audience.
           </p>
-          <!-- Connector into the next card. Lives on the card, so it
-               travels with the grid instead of being pinned to the
-               container. Hidden the moment the grid goes single-column. -->
-          <span class="map-arrow map-arrow-right" aria-hidden="true">
-            <svg viewBox="0 0 72 124" fill="none">
-              <path d="M2 16C32 16 56 36 56 100" stroke="currentColor"
-                    stroke-width="3" stroke-linecap="round" />
-              <path d="M46 88L56 104L66 88" stroke="currentColor"
-                    stroke-width="3" stroke-linecap="round"
-                    stroke-linejoin="round" />
-            </svg>
-          </span>
-        </li>
-        <li class="map">
-          <p class="map-num"><span>02</span></p>
-          <h3 class="map-what">Where do customers come from?</h3>
-          <p class="map-body">
-            Page snapshots will show you exactly where your traffic is coming from and how well each traffic cohort is converting.
+          <p>
+            Let&rsquo;s take an hour to go through your funnel, your main
+            product pages and templates, and come up with 3 experiments that
+            will give you the best direction for optimizing your website for
+            more conversions.
           </p>
-          <span class="map-arrow map-arrow-left" aria-hidden="true">
-            <svg viewBox="0 0 72 124" fill="none">
-              <path d="M2 16C32 16 56 36 56 100" stroke="currentColor"
-                    stroke-width="3" stroke-linecap="round" />
-              <path d="M46 88L56 104L66 88" stroke="currentColor"
-                    stroke-width="3" stroke-linecap="round"
-                    stroke-linejoin="round" />
-            </svg>
-          </span>
-        </li>
-        <li class="map">
-          <p class="map-num"><span>03</span></p>
-          <h3 class="map-what">What are they clicking?</h3>
-          <p class="map-body">
-            Click data is the vital data on your web pages. We want them to click the ATC button, of course, but where else are they clicking to make their buying decision?
-          </p>
-          <!-- Connector into the next card. Lives on the card, so it
-               travels with the grid instead of being pinned to the
-               container. Hidden the moment the grid goes single-column. -->
-          <span class="map-arrow map-arrow-right" aria-hidden="true">
-            <svg viewBox="0 0 72 124" fill="none">
-              <path d="M2 16C32 16 56 36 56 100" stroke="currentColor"
-                    stroke-width="3" stroke-linecap="round" />
-              <path d="M46 88L56 104L66 88" stroke="currentColor"
-                    stroke-width="3" stroke-linecap="round"
-                    stroke-linejoin="round" />
-            </svg>
-          </span>
-        </li>
-        <li class="map">
-          <p class="map-num"><span>04</span></p>
-          <h3 class="map-what">Where do they go next?</h3>
-          <p class="map-body">
-            See where the ones go that DON&rsquo;T go to checkout, to uncover insights into what information they are looking for.
-          </p>
-        </li>
-      </ul>
-
-      <div class="method">
-        <h3 class="method-title">Snapshot? What is that?</h3>
-        <p>
-          Snapshots track a set amount of traffic for deep behavioral insights.
-          Which is what is missing from other analytics platforms&hellip; which is
-          what you need for CRO. It is just not feasible to collect that much
-          data on every visitor, so we take a slice. A slice of your traffic from
-          your product page. A slice from a collection. A slice from the homepage
-          or blog&hellip; you get the point.
-        </p>
-        <ol class="flow">
-          <li>Store snapshot</li>
-          <li>Weakest pages</li>
-          <li>Page snapshots</li>
-          <li>Ship a change</li>
-          <li>Run it again</li>
-        </ol>
-      </div>
-
-      <div class="pricing">
-        <p class="pricing-line">
-          <strong>Starter is FREE!! Wahoo!!</strong> Just download it and get
-          started. If you are massive and need a bigger slice, choose the other
-          one. It&rsquo;s $99 a month.
-        </p>
-        <a class="btn btn-ghost" href="https://apps.shopify.com/snapshot-cro">
-          View on the Shopify App Store
-        </a>
-      </div>
-    </section>
-
-    <!-- ---- the offer ---- -->
-    <section class="band" id="call">
-      <header class="band-head">
-        <h2 class="band-title">Set Your <br>PACE</h2>
-        <p class="band-kicker">1:1 session to jumpstart CRO</p>
-        <p class="price-line">Price: $90 / 60 minutes</p>
-        <p class="band-sub">
-          Want some insights into how to get insights? Jump on a call and
-          let&rsquo;s walk through all of this. We will do some analytics and take
-          inventory of what you have, and then we will set out where you want to
-          go with CRO and how to get there. It&rsquo;s a lot, so bring your weird
-          AI note-taker thingy.
-        </p>
-      </header>
-
-      <div class="offer-main">
-        <h3 class="offer-h">On the call, we will:</h3>
-        <ol class="offer-steps">
-          <li>
-            <strong>Talk about your business.</strong> Where it&rsquo;s at, where
-            it&rsquo;s been, and where it&rsquo;s supposed to go if all goes
-            according to plan. We want to set the table here&hellip;
-          </li>
-          <li>
-            <strong>Dive into the numbers.</strong> CRO is a lot of numbers. A
-            lot. And we want to see what is going on behind the scenes so we know
-            what we are dealing with.
-          </li>
-          <li>
-            <strong>Opportunities &amp; pitfalls.</strong> There is always room
-            to grow if you know where to look. So we will go looking to where
-            there are opportunities for optimization and pitfalls that might be
-            affecting things.
-          </li>
-          <li>
-            <strong>Roadmapping.</strong> We will have a short but solid plan for
-            your next steps into optimizing your store so you can get from A to B
-            quickly.
-          </li>
-        </ol>
-
-        <h3 class="offer-h">Who it&rsquo;s for?</h3>
-        <p class="offer-p">
-          Anyone with a Shopify store and 60 minutes.
-        </p>
-
-        <div class="offer-cta">
-          <a class="btn btn-primary btn-lg" href="https://cal.com/jason-shepherd-fblx2v/snapshot-cro">Book Your 1:1 PACE Session &mdash; $90</a>
         </div>
+
+        <!-- The booking box. The face is here rather than in a separate
+             bio section because this is the one place on the page where
+             the reader is deciding whether to spend an hour with a
+             person, and that is who they would be spending it with. -->
+        <aside class="offer-aside book-card">
+          <div class="book-head">
+            <img class="book-face" src="assets/img/shep.webp"
+                 alt="Shep, who runs the session"
+                 width="120" height="120" loading="lazy" decoding="async">
+            <div class="book-title">
+              <h3>Book a Snapshot CRO Session</h3>
+              <p class="price">$150 / 1 hour</p>
+            </div>
+          </div>
+
+          <p class="book-lead">Live 1:1 session gets you:</p>
+          <ul class="book-list">
+            <li>CRO analysis</li>
+            <li>Checkout funnel analysis</li>
+            <li>PDP &amp; Collection review</li>
+            <li>Page Speed &amp; Distractors</li>
+            <li>3 tests to run after the call</li>
+          </ul>
+
+          <a class="btn btn-primary btn-lg btn-block" href="https://cal.com/jason-shepherd-fblx2v/snapshot-cro">Book 1:1 CRO Session</a>
+        </aside>
       </div>
+
+      <!-- HIDDEN, not deleted. Past examples: three case-study cards,
+           still on lorem and placeholder art. Uncomment when there is
+           real work to put in them; the .example rules are still in
+           the stylesheet waiting for it.
+
+      <h3 style="margin-top:48px">Or check out past examples</h3>
+      <div class="cols cols-3">
+        <article class="example">
+          <div class="ph ph-card">Example 1 &mdash; 4:3</div>
+          <h4 class="tbd">Lorem ipsum dolor sit</h4>
+          <p class="tbd">Consectetur adipiscing elit sed do eiusmod.</p>
+        </article>
+        <article class="example">
+          <div class="ph ph-card">Example 2 &mdash; 4:3</div>
+          <h4 class="tbd">Tempor incididunt labore</h4>
+          <p class="tbd">Ut enim ad minim veniam quis nostrud.</p>
+        </article>
+        <article class="example">
+          <div class="ph ph-card">Example 3 &mdash; 4:3</div>
+          <h4 class="tbd">Magna aliqua veniam</h4>
+          <p class="tbd">Duis aute irure dolor in reprehenderit.</p>
+        </article>
+      </div>
+      -->
     </section>
 
-    <!-- ---- closing ---- -->
-    <section class="closing">
-      <h2 class="closing-title">Start where your<br>shoppers stall.</h2>
-      <div class="cta-row">
-        <a class="btn btn-primary btn-lg" href="https://cal.com/jason-shepherd-fblx2v/snapshot-cro">Set Your PACE</a>
-        <a class="btn btn-ghost btn-lg" href="https://apps.shopify.com/snapshot-cro">
-          Install Snapshot &mdash; free
-        </a>
+    <!-- 7 ---- closing ---- -->
+    <section id="close" class="closing">
+      <h2>Start where your shoppers stall.</h2>
+      <div class="btn-row">
+        <a class="btn btn-primary btn-lg" href="https://apps.shopify.com/snapshot-cro">Download App &mdash; Free</a>
+        <a class="btn btn-secondary btn-lg" href="https://cal.com/jason-shepherd-fblx2v/snapshot-cro">Book 1:1 CRO Session</a>
       </div>
     </section>
 
   </main>
 
   <footer class="site-footer">
-    <div class="footer-inner">
+    <div class="wrap">
       <p>
         Snapshot CRO is built by The Real Heroes of Ecommerce &mdash; conversion
         rate optimization for Shopify stores.
