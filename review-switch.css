@@ -1,0 +1,55 @@
+/* ============================================================
+   REVIEW AID — DELETE BEFORE LAUNCH.
+
+   The copy switcher, kept in its own file so removing it is one
+   deletion plus two <link> tags and two <nav class="switch"> blocks
+   (one in /index.html, one in /v2/index.html).
+
+   01 = the live copy. 02 = the restructured copy at /v2/.
+   /v2/ carries <meta name="robots" content="noindex">; the live page
+   does not, so this switcher is visible to anyone who loads the real
+   site until it comes out.
+   ============================================================ */
+
+.switch {
+  position: fixed;
+  right: 16px;
+  bottom: 16px;
+  z-index: 99;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 10px;
+  background: #ffffff;
+  border: 2px solid #16150f;
+  border-radius: 4px;
+  box-shadow: 3px 3px 0 #16150f;
+  font-family: "Space Grotesk", system-ui, sans-serif;
+  font-size: .7rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.switch span { color: #55524a; }
+
+.switch a {
+  display: grid;
+  place-items: center;
+  min-width: 30px;
+  height: 26px;
+  padding: 0 6px;
+  color: #16150f;
+  border: 2px solid #16150f;
+  border-radius: 3px;
+  text-decoration: none;
+}
+
+.switch a:hover { background: #fcc42a; }
+
+.switch a[aria-current="page"] {
+  background: #16150f;
+  color: #ffffff;
+}
+
+@media print { .switch { display: none; } }

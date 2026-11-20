@@ -1,0 +1,579 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Snapshot CRO — Know which page to fix first</title>
+<meta name="description" content="A Shopify analytics app that samples real human visitors one page at a time, so you can see where shoppers stall and which fix is worth doing first. Install free, or book a 60-minute session.">
+<meta name="robots" content="noindex">
+
+<link rel="icon" href="../assets/img/logo.png" type="image/png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Space+Grotesk:wght@400;500;700&display=swap" rel="stylesheet">
+
+<!-- Same design system as copy 01, deliberately. The only thing being
+     compared here is the writing and the running order. -->
+<link rel="stylesheet" href="../style.css">
+<link rel="stylesheet" href="style.css">
+<link rel="stylesheet" href="../review-switch.css">
+</head>
+<body>
+
+<!-- ====================================================================
+     COPY 02 — restructured and re-voiced. Same design as the live page.
+
+     What changed, and why:
+
+     1. One voice. The live page runs three — an essayist, a guy at the
+        bar ("FREE!! Wahoo!!"), and generic SaaS ("from A to B"). This
+        version keeps only the essayist, because that's the voice that
+        sells a $90 call with a stranger.
+
+     2. Outcome before mechanism. PACE now arrives AFTER the proof and
+        the product, as the reason to believe rather than the hook.
+
+     3. One ask. Every primary button says the same thing and goes to
+        the same place. The app is demoted to a secondary, text-weight
+        link everywhere except its own section.
+
+     4. Proof exists at all. The live page has none.
+
+     5. Qualification by economics, not by revenue. "A one-point lift
+        would be a real number in your business" self-selects for
+        stores that can afford a retainer without naming a figure or a
+        traffic floor.
+
+     EVERY <span class="tbd"> IS A PLACEHOLDER and renders with a
+     marked style so it can't ship by accident. Search this file for
+     "tbd" to find all of them. The client names, numbers and quotes
+     below are invented stand-ins for the real ones.
+     ==================================================================== -->
+
+  <!-- Review aid. Delete this block, the review-switch.css link above,
+       and review-switch.css itself before launch. -->
+  <nav class="switch" aria-label="Copy versions">
+    <span>copy</span>
+    <a href="../">01</a>
+    <a href="./" aria-current="page">02</a>
+  </nav>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="./" aria-label="Snapshot CRO home">
+        <img src="../assets/img/logo-black.png" alt="Snapshot CRO" width="920" height="270">
+      </a>
+
+      <nav class="site-nav" aria-label="Primary">
+        <a class="nav-link" href="#proof">Results</a>
+        <a class="nav-link" href="#snapshot">The app</a>
+        <a class="btn btn-primary" href="https://cal.com/jason-shepherd-fblx2v/snapshot-cro">Book a session</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <!-- ---- hero ----
+         The live hero opens with a thesis ("Everybody shops at their
+         own pace") and never says what the thing is. This one states
+         the problem the buyer already feels, then answers what / for
+         whom / what changes inside the first paragraph. -->
+    <section class="hero">
+      <h1 class="hero-title">
+        <span class="line">Know which</span>
+        <span class="line">page to fix</span>
+        <span class="line"><em>first.</em></span>
+      </h1>
+
+      <p class="hero-sub">
+        You don&rsquo;t have a data problem. You have a decision problem. You
+        already know your conversion rate &mdash; what you don&rsquo;t know is
+        which page is costing you the most, and which fix is worth making
+        first. <strong>Snapshot</strong> is a Shopify app that samples real
+        human visitors, one page at a time, until that&rsquo;s obvious.
+      </p>
+
+      <div class="hero-offer">
+        <div class="hero-offer-text">
+          <h2 class="hero-offer-title">Set Your PACE</h2>
+          <p class="hero-offer-kicker">60 minutes on your store, with me</p>
+          <p class="hero-offer-p">
+            We go through your pages together, find where real shoppers stall,
+            and you leave with a ranked list of what to fix and what it should
+            move. $90.
+          </p>
+        </div>
+        <a class="btn btn-ink btn-lg" href="https://cal.com/jason-shepherd-fblx2v/snapshot-cro">Book a session &mdash; $90</a>
+      </div>
+
+      <p class="hero-alt">
+        Rather look first? <a href="https://apps.shopify.com/snapshot-cro">Install Snapshot free</a> and run a snapshot on one page.
+      </p>
+    </section>
+
+
+    <!-- ---- proof ----
+         The single biggest hole in the live page. Three kinds of proof
+         stacked, because they do different jobs: logos answer "has
+         anyone trusted him", numbers answer "does it work", and a
+         named quote answers "what is he like to work with". -->
+    <section class="band band-tint" id="proof">
+      <header class="band-head">
+        <h2 class="lead-title">This is what it moves</h2>
+        <p class="band-sub">
+          CRO work on Shopify stores doing between
+          <span class="tbd">$X00k</span> and <span class="tbd">$Xm</span> a
+          year, across <span class="tbd">apparel, home goods and supplements</span>.
+        </p>
+      </header>
+
+      <ul class="logos" aria-label="Selected clients">
+        <li class="logo-slot tbd">Brand A</li>
+        <li class="logo-slot tbd">Brand B</li>
+        <li class="logo-slot tbd">Brand C</li>
+      </ul>
+
+      <ul class="stats">
+        <li class="stat">
+          <p class="stat-num"><span class="tbd">+XX%</span></p>
+          <p class="stat-what">conversion rate on the product page</p>
+          <p class="stat-who"><span class="tbd">Brand A</span> &middot; <span class="tbd">X weeks</span></p>
+        </li>
+        <li class="stat">
+          <p class="stat-num"><span class="tbd">+$X.XX</span></p>
+          <p class="stat-what">revenue per visitor, sitewide</p>
+          <p class="stat-who"><span class="tbd">Brand B</span> &middot; <span class="tbd">X months</span></p>
+        </li>
+        <li class="stat">
+          <p class="stat-num"><span class="tbd">XX%</span></p>
+          <p class="stat-what">of paid traffic was landing on a page that couldn&rsquo;t convert it</p>
+          <p class="stat-who"><span class="tbd">Brand C</span> &middot; found in session one</p>
+        </li>
+      </ul>
+    </section>
+
+
+    <!-- ---- the problem ----
+         Names the thing the buyer has already tried and why it didn't
+         answer the question. This is also where the fixed-sample idea
+         lands — on the live page it's buried in a grey box under the
+         heading "Snapshot? What is that?", which is the most
+         differentiated idea on the site explained apologetically. -->
+    <section class="band">
+      <header class="band-head">
+        <h2 class="lead-title">Analytics tells you what happened. Not what to do about it.</h2>
+      </header>
+
+      <div class="two-up">
+        <div class="col">
+          <h3 class="col-h">What you have now</h3>
+          <p>
+            GA4 gives you sessions and a conversion rate per page. A heatmap
+            gives you a pretty picture of one page on a good day. Your agency
+            gives you a list of twenty things, all of which are defensible and
+            none of which are ranked.
+          </p>
+          <p>
+            So you ship something, the number moves, and nobody can say whether
+            it was the change or the month.
+          </p>
+        </div>
+        <div class="col">
+          <h3 class="col-h">What&rsquo;s actually missing</h3>
+          <p>
+            Three answers. <strong>Which page</strong> is costing you the most
+            right now. <strong>What real people do</strong> on it before they
+            leave. And whether the thing you shipped last month
+            <strong>actually worked</strong>.
+          </p>
+          <p>
+            Every one of those is a comparison, and comparisons are exactly
+            what date-range analytics can&rsquo;t give you.
+          </p>
+        </div>
+      </div>
+
+      <div class="method">
+        <h3 class="method-title">Why a snapshot, and not a date range</h3>
+        <p>
+          A snapshot measures a <strong>fixed number of real human
+          visitors</strong> rather than a window of time. That one decision is
+          what makes the numbers worth anything: two snapshots are directly
+          comparable no matter how traffic moved between them. Your
+          before-and-after becomes a fact instead of an argument about
+          seasonality, a sale you forgot about, or a week of bot traffic.
+        </p>
+        <ol class="flow">
+          <li>Snapshot the store</li>
+          <li>Find the weakest page</li>
+          <li>Snapshot that page</li>
+          <li>Ship one change</li>
+          <li>Snapshot it again</li>
+        </ol>
+      </div>
+    </section>
+
+
+    <!-- ---- case study ----
+         One story told properly beats three bullet points. Situation →
+         what the data said → what changed → result, then a human
+         quote to carry it. -->
+    <section class="band band-tint" id="case">
+      <header class="band-head">
+        <h2 class="lead-title">What this looks like on a real store</h2>
+      </header>
+
+      <div class="case">
+        <ol class="case-steps">
+          <li>
+            <h3>The situation</h3>
+            <p>
+              <span class="tbd">Brand A</span> was spending
+              <span class="tbd">$XXk a month</span> on paid traffic with a
+              conversion rate that hadn&rsquo;t moved in
+              <span class="tbd">three quarters</span>. They&rsquo;d already
+              rewritten the product page twice.
+            </p>
+          </li>
+          <li>
+            <h3>What the snapshot said</h3>
+            <p>
+              <span class="tbd">The page wasn&rsquo;t the problem — the route
+              to it was. Paid visitors were landing on a collection page built
+              for people who already knew the brand, and leaving before they
+              ever reached a product.</span>
+            </p>
+          </li>
+          <li>
+            <h3>What changed</h3>
+            <p>
+              <span class="tbd">One landing page, written for the Prognosis
+              stage: what the shopper thinks will fix their problem, answered
+              in the first screen. No redesign, no replatform.</span>
+            </p>
+          </li>
+          <li>
+            <h3>The result</h3>
+            <p>
+              <span class="tbd">+XX% conversion rate on paid traffic inside X
+              weeks, confirmed by a second snapshot of the same size.</span>
+            </p>
+          </li>
+        </ol>
+
+        <figure class="quote">
+          <blockquote>
+            <p class="tbd">
+              &ldquo;We&rsquo;d been staring at the same dashboard for a year.
+              He found the thing in an hour, and it wasn&rsquo;t the thing we
+              were arguing about.&rdquo;
+            </p>
+          </blockquote>
+          <figcaption>
+            <span class="tbd">First Last</span>,
+            <span class="tbd">Founder, Brand A</span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+
+    <!-- ---- the app ----
+         Free, so it's the low-friction entry point — but it is NOT the
+         primary ask, because the call is what turns into retainer
+         work. Screenshots do the selling here; the four questions are
+         captions, not paragraphs. -->
+    <section class="band" id="snapshot">
+      <header class="band-head">
+        <h2 class="lead-title">The app does the measuring</h2>
+        <p class="band-sub">
+          Snapshot is live on the Shopify App Store and free to install. It
+          answers four questions, and deliberately not a hundred.
+        </p>
+      </header>
+
+      <div class="shots">
+        <figure class="shot">
+          <div class="shot-frame tbd">Screenshot: store snapshot, pages ranked by what they cost</div>
+          <figcaption>Every page, ranked by the revenue its visitors didn&rsquo;t produce.</figcaption>
+        </figure>
+        <figure class="shot">
+          <div class="shot-frame tbd">Screenshot: traffic split into humans, zombies and bots</div>
+          <figcaption>Each source split into humans, zombies and bots &mdash; before you judge a channel.</figcaption>
+        </figure>
+        <figure class="shot">
+          <div class="shot-frame tbd">Screenshot: click map with post-click outcomes</div>
+          <figcaption>What got clicked, and what happened after it got clicked.</figcaption>
+        </figure>
+      </div>
+
+      <ul class="maps">
+        <li class="map">
+          <p class="map-num"><span>01</span></p>
+          <h3 class="map-what">Which page is costing you the most?</h3>
+          <p class="map-body">
+            Conversion rate and revenue per page, so the first thing you fix is
+            the thing that was actually losing money.
+          </p>
+          <span class="map-arrow map-arrow-right" aria-hidden="true">
+            <svg viewBox="0 0 72 124" fill="none">
+              <path d="M2 16C32 16 56 36 56 100" stroke="currentColor"
+                    stroke-width="3" stroke-linecap="round" />
+              <path d="M46 88L56 104L66 88" stroke="currentColor"
+                    stroke-width="3" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
+          </span>
+        </li>
+        <li class="map">
+          <p class="map-num"><span>02</span></p>
+          <h3 class="map-what">Who is actually arriving?</h3>
+          <p class="map-body">
+            Every source split into humans, zombies and bots. A channel that
+            looks strong on sessions often looks very different once they come out.
+          </p>
+          <span class="map-arrow map-arrow-left" aria-hidden="true">
+            <svg viewBox="0 0 72 124" fill="none">
+              <path d="M2 16C32 16 56 36 56 100" stroke="currentColor"
+                    stroke-width="3" stroke-linecap="round" />
+              <path d="M46 88L56 104L66 88" stroke="currentColor"
+                    stroke-width="3" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
+          </span>
+        </li>
+        <li class="map">
+          <p class="map-num"><span>03</span></p>
+          <h3 class="map-what">What are they inspecting?</h3>
+          <p class="map-body">
+            Every element that got clicked and what happened next &mdash; so a
+            button with plenty of clicks and no purchases shows up as the
+            distraction it is.
+          </p>
+          <span class="map-arrow map-arrow-right" aria-hidden="true">
+            <svg viewBox="0 0 72 124" fill="none">
+              <path d="M2 16C32 16 56 36 56 100" stroke="currentColor"
+                    stroke-width="3" stroke-linecap="round" />
+              <path d="M46 88L56 104L66 88" stroke="currentColor"
+                    stroke-width="3" stroke-linecap="round"
+                    stroke-linejoin="round" />
+            </svg>
+          </span>
+        </li>
+        <li class="map">
+          <p class="map-num"><span>04</span></p>
+          <h3 class="map-what">How did they leave?</h3>
+          <p class="map-body">
+            Closed the tab, went idle, clicked away, or moved on to checkout.
+            The shape of the exit says whether the page lost them or passed
+            them along.
+          </p>
+        </li>
+      </ul>
+
+      <div class="pricing">
+        <p class="pricing-line">
+          <strong>Free to install and use.</strong> If you need bigger samples
+          than the free tier allows, Advanced is $99/month.
+        </p>
+        <a class="btn btn-ghost" href="https://apps.shopify.com/snapshot-cro">
+          View on the Shopify App Store
+        </a>
+      </div>
+    </section>
+
+
+    <!-- ---- PACE ----
+         Cut to about a third of its live length and moved behind the
+         proof. It's the reason the recommendations are any good, not
+         the pitch — so it reads as method, fast. -->
+    <section class="band band-tint" id="pace">
+      <header class="band-head">
+        <h2 class="lead-title">The framework behind the recommendations</h2>
+        <p class="band-sub">
+          Numbers tell you where people stall. PACE tells you why. It came out
+          of <span class="tbd">years</span> of qualitative and quantitative
+          research with retail and DTC brands, and it maps the four stages
+          every purchase runs through &mdash; whether it takes four minutes or
+          four months.
+        </p>
+      </header>
+
+      <ol class="pace-quick">
+        <li>
+          <p class="pq-mark" aria-hidden="true">P</p>
+          <h3>Prognosis</h3>
+          <p>What they already believe will fix their problem. Your page either
+             confirms that theory or argues with it.</p>
+        </li>
+        <li>
+          <p class="pq-mark" aria-hidden="true">A</p>
+          <h3>Activity</h3>
+          <p>Where they looked before they got here &mdash; and what that route
+             taught them to expect.</p>
+        </li>
+        <li>
+          <p class="pq-mark" aria-hidden="true">C</p>
+          <h3>Criteria</h3>
+          <p>The private checklist. Half of it is what you must have; half is
+             what rules you out on the spot.</p>
+        </li>
+        <li>
+          <p class="pq-mark" aria-hidden="true">E</p>
+          <h3>Event</h3>
+          <p>What finally tips the decision into an order. Plenty of stores
+             lose people who had already decided.</p>
+        </li>
+      </ol>
+
+      <p class="pace-note">
+        Miss the stage a shopper is actually in, and the page answers a
+        question they haven&rsquo;t asked yet. That&rsquo;s most pages.
+      </p>
+    </section>
+
+
+    <!-- ---- the offer ----
+         Honest about being a loss leader, which is the thing that makes
+         $90 believable rather than suspicious. Qualification is by
+         economics, and the "not for you" paragraph is doing more work
+         than the "for you" one. -->
+    <section class="band" id="call">
+      <header class="band-head">
+        <h2 class="band-title">Set Your <br>PACE</h2>
+        <p class="band-kicker">A 60-minute 1:1 session on your store</p>
+        <p class="price-line">$90 &middot; 60 minutes &middot; nothing to prepare</p>
+        <p class="band-sub">
+          A CRO audit from an agency runs <span class="tbd">$2,000 to
+          $5,000</span> and takes three weeks. This is sixty minutes and
+          $90, and I&rsquo;ll tell you plainly why: it&rsquo;s how I meet the
+          stores I end up working with. You get the findings either way.
+        </p>
+      </header>
+
+      <div class="offer-main">
+        <h3 class="offer-h">What we do</h3>
+        <ol class="offer-steps">
+          <li>
+            <strong>Walk your store the way a shopper does.</strong> Not a
+            feature audit. We follow the route a real customer takes and mark
+            every place the page stops answering them.
+          </li>
+          <li>
+            <strong>Read the numbers together.</strong> If Snapshot is
+            installed we go through your real data. If it isn&rsquo;t, we work
+            from what you have &mdash; it still works, it&rsquo;s just slower.
+          </li>
+          <li>
+            <strong>Find the stage you&rsquo;re skipping.</strong> Most stores
+            are strong at Criteria and silent on Event. Yours will have its own
+            shape, and it&rsquo;s usually not the one you expect.
+          </li>
+          <li>
+            <strong>Rank the work.</strong> Not a pile of ideas &mdash; an
+            ordered list: what to change first, what it should move, and how
+            you&rsquo;ll know whether it worked.
+          </li>
+        </ol>
+
+        <h3 class="offer-h">What you leave with</h3>
+        <ul class="takeaways">
+          <li>A ranked list of fixes, in the order worth doing them</li>
+          <li>The one stage of the journey your store is currently skipping</li>
+          <li>A way to tell, in <span class="tbd">X weeks</span>, whether the first fix worked</li>
+        </ul>
+
+        <div class="fit">
+          <div class="fit-col">
+            <h3 class="offer-h">This is for you if</h3>
+            <p>
+              A one-point lift in conversion rate would be a real number in your
+              business &mdash; and there&rsquo;s someone who can ship a change
+              when we find one. That&rsquo;s the whole bar. If you&rsquo;re
+              already spending meaningfully on traffic, you clear it.
+            </p>
+          </div>
+          <div class="fit-col">
+            <h3 class="offer-h">It&rsquo;s not for you if</h3>
+            <p>
+              You&rsquo;re pre-launch or pre-traffic &mdash; there&rsquo;s
+              nothing to measure yet and I&rsquo;d be taking your money. Or
+              you&rsquo;re looking for someone to do all of it for you.
+              That&rsquo;s a different conversation, and we can have it after
+              this one if it makes sense.
+            </p>
+          </div>
+        </div>
+
+        <div class="offer-cta">
+          <a class="btn btn-primary btn-lg" href="https://cal.com/jason-shepherd-fblx2v/snapshot-cro">Book a session &mdash; $90</a>
+          <p class="guarantee tbd">
+            If you don&rsquo;t leave with at least three specific things to
+            fix, tell me and I&rsquo;ll refund it.
+          </p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ---- who you're talking to ----
+         The live page is signed only by a company in the footer. For a
+         paid 1:1 session the person IS the product, so they need a
+         name and a face before the last CTA. -->
+    <section class="band band-tint" id="who">
+      <div class="bio">
+        <div class="bio-portrait tbd">Photo</div>
+        <div class="bio-text">
+          <h2 class="bio-name"><span class="tbd">Jason Shepherd</span></h2>
+          <p class="bio-role">Conversion rate optimization for Shopify stores &middot; The Real Heroes of Ecommerce</p>
+          <p>
+            <span class="tbd">I&rsquo;ve spent years doing qualitative and
+            quantitative research for retail and DTC brands &mdash; the
+            interviews and the regressions both. PACE came out of that work,
+            and Snapshot came out of needing a tool that measured the things
+            PACE cares about.</span>
+          </p>
+          <p>
+            <span class="tbd">I work with a small number of stores at a time on
+            ongoing CRO. The session is usually where that starts.</span>
+          </p>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- ---- closing ----
+         One ask. The app is a text link, not a competing button —
+         two equal CTAs is zero CTAs. -->
+    <section class="closing">
+      <h2 class="closing-title">Start where your<br>shoppers stall.</h2>
+      <p class="closing-sub">
+        Sixty minutes, $90, and you&rsquo;ll know which page to fix first.
+      </p>
+      <div class="cta-row">
+        <a class="btn btn-primary btn-lg" href="https://cal.com/jason-shepherd-fblx2v/snapshot-cro">Book a session &mdash; $90</a>
+      </div>
+      <p class="closing-alt">
+        Or <a href="https://apps.shopify.com/snapshot-cro">install Snapshot free</a> and have a look yourself first.
+      </p>
+    </section>
+
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p>
+        Snapshot CRO is built by The Real Heroes of Ecommerce &mdash; conversion
+        rate optimization for Shopify stores.
+      </p>
+      <p class="footer-links">
+        <a href="https://therealheroesofecommerce.com/">Home</a>
+        <a href="https://therealheroesofecommerce.com/newsletter.html">Newsletter</a>
+        <a href="https://therealheroesofecommerce.com/snapshot-privacy-policy.html">Privacy</a>
+      </p>
+    </div>
+  </footer>
+
+</body>
+</html>
